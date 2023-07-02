@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Title } from "@angular/platform-browser";
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { ModalTermsConditionsComponent } from 'src/app/components/modal-terms-conditions/modal-terms-conditions.component';
+import {MatDialog, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login-page',
@@ -10,7 +12,8 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 export class LoginPageComponent {
 
   constructor(private titleService:Title,
-              private formBuilder:FormBuilder) {
+              private formBuilder:FormBuilder,
+              private dialog: MatDialog) {
     this.titleService.setTitle("Sibut Medicare | Login");
   }
 
@@ -26,6 +29,13 @@ export class LoginPageComponent {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
 
+  openTermsConditionsDialog() {
+    this.dialog.open(ModalTermsConditionsComponent, {
+      width: 'fit-content',
+      enterAnimationDuration: 500,
+      exitAnimationDuration: 500,
+    });
+  }
 
   submitLoginCredentials(credentials: FormGroup) {
     let data = credentials;

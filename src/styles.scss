@@ -5,7 +5,35 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body { height: 100%; font-family: 'Inter', sans-serif !important; }
-body { margin: 0; }
+html,
+body {
+    height: 100%;
+    font-family: 'Inter', sans-serif !important;
+}
 
-.mdc-notched-outline__notch { border-right: none; }
+body {
+    margin: 0;
+}
+
+.mdc-notched-outline__notch {
+    border-right: none;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
