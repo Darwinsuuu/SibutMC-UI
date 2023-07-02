@@ -23,13 +23,15 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ModalSignupOtpComponent } from './components/modal-signup-otp/modal-signup-otp.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ModalTermsConditionsComponent } from './components/modal-terms-conditions/modal-terms-conditions.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     SignupPageComponent,
-    ModalSignupOtpComponent
+    ModalSignupOtpComponent,
+    ModalTermsConditionsComponent
   ],
   imports: [
     BrowserModule,
