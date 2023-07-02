@@ -1,0 +1,20 @@
+<div class="w-[100%] max-w-[420px] shadow-lg p-5">
+    <h1 class="font-semibold">Verification Code Sent</h1>
+    <p>We have sent the verification code to your number <span class="font-semibold">({{ data.contact_no }})</span>.</p>
+
+    <mat-form-field appearance="outline" class="!w-[100%]">
+        <mat-label>OTP</mat-label>
+        <input autocomplete="off" matInput placeholder="Enter 6 digit code" [(ngModel)]="OTPCodes" (keyup)="checkOTPCodes()" maxlength="6">
+    </mat-form-field>
+
+
+    <div class="text-center">
+        <div class="flex items-center gap-3 justify-center" *ngIf="showSpinner">
+            <mat-spinner diameter="25"></mat-spinner>
+            <span class="font-medium">Validating ...</span>
+        </div>
+    
+        <p class="font-medium !m-0 text-red-600" *ngIf="showOTPCodeValidation && !showSpinner">Invalid OTP codes!</p>
+    </div>
+
+</div>

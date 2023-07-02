@@ -10,10 +10,9 @@
         </div>
         
         <div class="shadow-lg border rounded-sm p-8 w-[100%] max-w-[469px] md:!w-[50%] m-auto">
-            <p class="font-semibold">Enter credentials</p>
+            <p class="font-semibold">Login credentials</p>
     
             <form [formGroup]="loginCredentials" (ngSubmit)="submitLoginCredentials(loginCredentials)">
-    
                 <mat-form-field appearance="outline" class="!w-[100%]">
                     <mat-label>Username</mat-label>
                     <input matInput placeholder="" formControlName="username">
@@ -25,6 +24,10 @@
                     <mat-icon matSuffix (click)="showPassword()">{{ isPasswordVisible ? "visibility" : "visibility_off"
                         }}</mat-icon>
                 </mat-form-field>
+
+                <div class="text-right mt-[-10px] mb-3">
+                    <a routerLink="">Forgot password?</a>
+                </div>
     
                 <button mat-raised-button color="primary" class="w-[100%] !py-6">Login</button>
                 <p class="text-center !m-0 !my-3 text-slate-500">or</p>
@@ -32,12 +35,11 @@
     
                 <div class="text-[12px] text-slate-500">
                     <p class="font-semibold !m-0 !mt-5">Note:</p>
-                    <p>Accessing our application indicates that you read and agreed to the <a>terms of use and conditions</a> of healthcare center.</p>
+                    <p>Accessing our application indicates that you have read and agreed to the <a>terms of use and conditions</a> of healthcare center.</p>
                 </div>
-
             </form>
         </div>
-    
+
     </div>
     
 </div>

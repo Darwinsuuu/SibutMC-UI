@@ -1,1 +1,195 @@
-<p>signup-page works!</p>
+<div class="flex items-center h-[100vh] w-[100%]">
+
+    <div class="lg:flex lg:flex-row lg:gap-5 lg:items-start lg:w-[100%] lg:max-w-[1600px] lg:m-auto lg:px-14">
+
+        <div class="hidden lg:block lg:mt-20 lg:w-[40%]">
+
+            <img src="../../../assets/images/undraw_doctor_kw-5-l.svg" alt="" width="400" class="m-auto mb-10">
+
+            <h1 class="!m-0 !font-bold !text-3xl">Sibut Medicare</h1>
+            <h3 class="text-slate-500">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta sit quod facilis
+                recusandae architecto quia non blanditiis! Ad minus rerum inventore quae laboriosam voluptatibus
+                corrupti.</h3>
+            <h3 class="!font-semibold">Already have account?</h3>
+            <button mat-raised-button color="primary" type="button" routerLink="/login">Click here to login</button>
+        </div>
+
+        <div class="p-1 md:p-5 lg:w-[60%] m-auto lg:p-10 lg:shadow-lg lg:border lg:rounded">
+
+            <div class="text-center py-3 !pt-10 lg:!pt-0 lg:hidden">
+                <h1 class="!m-0 !font-bold !text-3xl">Sibut Medicare</h1>
+                <h3 class="text-slate-500">Create an account</h3>
+                <p>Already have account? <a class="underline text-blue-500" routerLink="/login">Login here</a></p>
+            </div>
+
+            <hr class="block lg:hidden">
+
+            <mat-vertical-stepper [linear]="false" #stepper>
+
+                <mat-step [stepControl]="personalInfo">
+                    <form [formGroup]="personalInfo">
+                        <ng-template matStepLabel>Personal Information</ng-template>
+
+                        <div class="py-3">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                <mat-form-field appearance="outline" class="!w-[100%]">
+                                    <mat-label>Firstname</mat-label>
+                                    <input matInput placeholder="" formControlName="firstname">
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="!w-[100%]">
+                                    <mat-label>Middlename <span class="text-[12px]">(Optional)</span></mat-label>
+                                    <input matInput placeholder="" formControlName="middlename">
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="!w-[100%] md:col-span-2">
+                                    <mat-label>Lastname</mat-label>
+                                    <input autocomplete="off" matInput placeholder="" formControlName="lastname">
+                                </mat-form-field>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+                                <mat-form-field appearance="outline" class="!w-[100%]">
+                                    <mat-label for="test">Select gender</mat-label>
+                                    <mat-select formControlName="gender">
+                                        <mat-option value="Male">Male</mat-option>
+                                        <mat-option value="Female">Female</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="!w-[100%]">
+                                    <mat-label>Birthdate</mat-label>
+                                    <input matInput [matDatepicker]="picker" type="date" formControlName="birthdate"
+                                        placeholder="MM/DD/YYYY">
+                                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="!w-[100%]">
+                                    <mat-label>Martial Status</mat-label>
+                                    <mat-select formControlName="marital_status">
+                                        <mat-option value="Male">Single</mat-option>
+                                        <mat-option value="Female">Married</mat-option>
+                                        <mat-option value="Female">Widowed</mat-option>
+                                        <mat-option value="Female">Divorced</mat-option>
+                                        <mat-option value="Female">Seperated</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+
+
+
+
+                            <div>
+                                <button mat-raised-button color="primary" matStepperNext class="!px-9">Next</button>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </mat-step>
+
+
+                <mat-step [stepControl]="contactInfo">
+                    <form [formGroup]="contactInfo">
+                        <ng-template matStepLabel>Contact Information</ng-template>
+
+                        <div class="py-3">
+                            <div class="grid grid-cols-1 md:grid-cols-1 gap-2">
+                                <mat-form-field appearance="outline" class="!w-[100%]">
+                                    <mat-label>Contact No.</mat-label>
+                                    <input autocomplete="off" matInput placeholder="Ex. 09228215465"
+                                        formControlName="contact_no">
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="!w-[100%]">
+                                    <mat-label>Email Address</mat-label>
+                                    <input autocomplete="off" matInput placeholder="" formControlName="email">
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="!w-[100%]">
+                                    <mat-label>Address</mat-label>
+                                    <textarea matInput rows="5" placeholder="Street, Subdivision, City, Province"
+                                        formControlName="address"></textarea>
+                                </mat-form-field>
+                            </div>
+
+                            <div>
+                                <button mat-stroked-button color="primary" matStepperPrevious
+                                    class="!px-9 !mr-3">Back</button>
+                                <button mat-raised-button color="primary" matStepperNext class="!px-9">Next</button>
+                            </div>
+                        </div>
+                    </form>
+                </mat-step>
+
+
+                <mat-step [stepControl]="emergencyContactInfo">
+                    <form [formGroup]="emergencyContactInfo">
+                        <ng-template matStepLabel>Contact In Case of Emergency</ng-template>
+
+                        <div class="py-3">
+
+                            <div class="grid grid-cols-1 md:grid-cols-1 gap-2">
+                                <mat-form-field appearance="outline" class="!w-[100%]">
+                                    <mat-label>Fullname</mat-label>
+                                    <input autocomplete="off" matInput placeholder="" formControlName="fullname">
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="!w-[100%]">
+                                    <mat-label>Contact No.</mat-label>
+                                    <input autocomplete="off" matInput placeholder="Ex. 09228215465"
+                                        formControlName="emergency_contact_no">
+                                </mat-form-field>
+                            </div>
+
+                            <div>
+                                <button mat-stroked-button color="primary" matStepperPrevious
+                                    class="!px-9 !mr-3">Back</button>
+                                <button mat-raised-button color="primary" matStepperNext class="!px-9">Next</button>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </mat-step>
+
+
+                <mat-step [stepControl]="accountInfo">
+
+                    <form [formGroup]="accountInfo">
+                        <ng-template matStepLabel>Almost Done</ng-template>
+
+                        <div class="py-3">
+                            <mat-form-field appearance="outline" class="!w-[100%]">
+                                <mat-label>Username</mat-label>
+                                <input autocomplete="off" matInput placeholder="" formControlName="username">
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" class="!w-[100%]">
+                                <mat-label>Password</mat-label>
+                                <input matInput placeholder="" type="{{ isPasswordVisible ? 'text' : 'password' }}" formControlName="password">
+                                <mat-icon matSuffix (click)="showPassword()">{{ isPasswordVisible ? "visibility" :
+                                    "visibility_off"
+                                    }}</mat-icon>
+                            </mat-form-field>
+
+                            <div>
+                                <button mat-stroked-button color="primary" matStepperPrevious
+                                    class="!px-9 !mr-3">Back</button>
+                                <button mat-raised-button color="primary" matStepperNext class="!px-9"
+                                    (click)="getAccountCredentials()">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </mat-step>
+
+
+            </mat-vertical-stepper>
+        </div>
+    </div>
+
+</div>
