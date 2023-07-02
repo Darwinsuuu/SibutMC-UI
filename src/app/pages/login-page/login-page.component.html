@@ -21,7 +21,7 @@
                 <mat-form-field appearance="outline" class="!w-[100%]">
                     <mat-label>Password</mat-label>
                     <input matInput placeholder="" type="{{ isPasswordVisible ? 'text' : 'password' }}" formControlName="password">
-                    <mat-icon matSuffix (click)="showPassword()">{{ isPasswordVisible ? "visibility" : "visibility_off"
+                    <mat-icon *ngIf="this.loginCredentials.get('password')?.value" matSuffix (click)="showPassword()">{{ isPasswordVisible ? "visibility" : "visibility_off"
                         }}</mat-icon>
                 </mat-form-field>
 
