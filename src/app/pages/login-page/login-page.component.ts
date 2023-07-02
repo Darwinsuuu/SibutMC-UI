@@ -18,12 +18,13 @@ export class LoginPageComponent {
     this.titleService.setTitle("Sibut Medicare | Login");
   }
 
-  isPasswordVisible: boolean = false;
-  
   loginCredentials = this.formBuilder.group({
     username: [''],
     password: [''],
   });
+
+  isPasswordVisible: boolean = false;
+  validCredentials: boolean = true;
 
 
   showPassword() {
@@ -49,7 +50,9 @@ export class LoginPageComponent {
 
   submitLoginCredentials(credentials: FormGroup) {
     let data = credentials;
-
+    this.loginCredentials.reset();
+    
+    this.validCredentials = false;
     // api call here
   }
 
