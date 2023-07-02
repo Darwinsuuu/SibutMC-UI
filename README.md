@@ -7,7 +7,7 @@
 - Create a new terminal in your VS Code or press Crtl + Shift + ` and type "npm i" to install all required dependencies
 - Once installed, run "ng serve"
 
-\\
+\ 
 
 **How to run in Internet**
 - Go to official website [barangaymedicalcenter.com]()
