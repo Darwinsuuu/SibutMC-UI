@@ -24,6 +24,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ModalSignupOtpComponent } from './components/modal-signup-otp/modal-signup-otp.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ModalTermsConditionsComponent } from './components/modal-terms-conditions/modal-terms-conditions.component';
+import { ModalForgotPasswordComponent } from './components/modal-forgot-password/modal-forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ModalTermsConditionsComponent } from './components/modal-terms-conditio
     LoginPageComponent,
     SignupPageComponent,
     ModalSignupOtpComponent,
-    ModalTermsConditionsComponent
+    ModalTermsConditionsComponent,
+    ModalForgotPasswordComponent
   ],
   imports: [
     BrowserModule,

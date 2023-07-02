@@ -31,12 +31,7 @@ export class ModalSignupOtpComponent {
         }
 
       }, 1200);
-
-      
     }
-
-
-
   }
 
 
