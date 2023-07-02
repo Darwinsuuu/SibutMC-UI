@@ -10,5 +10,3 @@
 
 ### How to run in Internet
 - Go to official website <a href="https://barangaymedicalcenter.com" target="_blank">barangaymedicalcenter.com</a>
- 
- <script src='https://cdn.jsdelivr.net/gh/eddymens/markdown-external-link-script@v1.0.0/main.min.js'></script>
