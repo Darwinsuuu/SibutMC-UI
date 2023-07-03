@@ -1,1 +1,8 @@
-<router-outlet></router-outlet>
+<div [ngClass]="{'flex flex-row w-full h-full': auth.isAuth}">
+
+    <ng-container *ngIf="auth.isAuth">
+        <app-sidenav></app-sidenav>
+    </ng-container>
+    
+    <router-outlet [ngClass]="{'!p-10': auth.isAuth}"></router-outlet>
+</div>

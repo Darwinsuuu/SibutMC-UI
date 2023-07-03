@@ -13,7 +13,7 @@
             <p class="font-semibold">Login credentials</p>
             <p class="text-red-500 font-semibold" *ngIf="!validCredentials">Invalid username or password</p>
 
-            <form [formGroup]="loginCredentials" (ngSubmit)="submitLoginCredentials(loginCredentials)">
+            <form [formGroup]="loginCredentials" (ngSubmit)="submitLoginCredentials(loginCredentials.value)">
                 <mat-form-field appearance="outline" class="!w-[100%]">
                     <mat-label>Username</mat-label>
                     <input matInput placeholder="" formControlName="username">

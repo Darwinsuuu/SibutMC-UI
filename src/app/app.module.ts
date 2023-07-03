@@ -8,6 +8,8 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+
 
 // Angular Material
 import { MatInputModule } from '@angular/material/input';
@@ -25,6 +27,11 @@ import { ModalSignupOtpComponent } from './components/modal-signup-otp/modal-sig
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ModalTermsConditionsComponent } from './components/modal-terms-conditions/modal-terms-conditions.component';
 import { ModalForgotPasswordComponent } from './components/modal-forgot-password/modal-forgot-password.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +40,9 @@ import { ModalForgotPasswordComponent } from './components/modal-forgot-password
     SignupPageComponent,
     ModalSignupOtpComponent,
     ModalTermsConditionsComponent,
-    ModalForgotPasswordComponent
+    ModalForgotPasswordComponent,
+    DashboardComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +62,9 @@ import { ModalForgotPasswordComponent } from './components/modal-forgot-password
     MatNativeDateModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    MatSidenavModule,
+    MatListModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

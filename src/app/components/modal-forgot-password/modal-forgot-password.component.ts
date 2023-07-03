@@ -25,7 +25,8 @@ export class ModalForgotPasswordComponent {
   isPasswordVisible: boolean = false;
   OTPCodes: string = '';
   validOTPCode: string = Math.floor(100000 + Math.random() * 900000).toString();
-
+  btnOTPSend: string = "Send OTP";
+  isbtnDisabled: boolean = false;
 
   showPassword() {
     this.isPasswordVisible = !this.isPasswordVisible;
@@ -46,11 +47,29 @@ export class ModalForgotPasswordComponent {
       this.validOTPCode = Math.floor(100000 + Math.random() * 900000).toString();
       alert('This is temporary! OTP: ' + this.validOTPCode);
       
+      this.startCountdown();
+
       // api call here
     }
 
   }
 
+
+  startCountdown() {
+    let counter = 180;
+    this.isbtnDisabled = true;
+
+    const interval = setInterval(() => {
+      this.btnOTPSend = counter.toString() + "s";
+      counter--;
+        
+      if (counter < 0 ) {
+        clearInterval(interval);
+        this.btnOTPSend = "Send OTP";
+        this.isbtnDisabled = false;
+      }
+    }, 1000);
+  }
 
   submitCredentials(credentials: FormGroup) {
     let data = credentials;
