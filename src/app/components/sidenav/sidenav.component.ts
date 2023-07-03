@@ -16,7 +16,7 @@ export class SidenavComponent implements OnInit {
       category: "Admin",
       nav: [
         {navName: "Dashboard", navLink: "/dashboard", icon: faHome},
-        {navName: "Employees", navLink: "/test", icon: faUserGroup},
+        {navName: "Employees", navLink: "/employees", icon: faUserGroup},
         {navName: "Appointments", navLink: "/test", icon: faCalendarCheck},
         {navName: "Patients", navLink: "/test", icon: faHospitalUser},
         {navName: "Activity Log", navLink: "/test", icon: faClipboardList},

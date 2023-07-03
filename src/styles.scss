@@ -21,6 +21,7 @@ body {
 
 ::-webkit-scrollbar {
     width: 4px;
+    height: 0px;
 }
 
 /* Track */
@@ -38,6 +39,8 @@ body {
     background: #555;
 }
 
-:host ::ng-deep nav {
-    height: 100vh;
+:host ::ng-deep { 
+    nav {
+        height: 100vh;
+    }
 }

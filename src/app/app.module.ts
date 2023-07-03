@@ -31,7 +31,12 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-
+import { HeaderComponent } from './components/header/header.component';
+import { EmployeesComponent } from './pages/employees/employees.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { ManageEmployeeComponent } from './components/employee/manage-employee/manage-employee.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table'  
 
 @NgModule({
   declarations: [
@@ -42,7 +47,10 @@ import { MatListModule } from '@angular/material/list';
     ModalTermsConditionsComponent,
     ModalForgotPasswordComponent,
     DashboardComponent,
-    SidenavComponent
+    SidenavComponent,
+    HeaderComponent,
+    EmployeesComponent,
+    ManageEmployeeComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +72,10 @@ import { MatListModule } from '@angular/material/list';
     MatProgressSpinnerModule,
     MatSidenavModule,
     MatListModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatTabsModule,
+    MatPaginatorModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

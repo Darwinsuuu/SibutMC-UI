@@ -1,11 +1,11 @@
-<div class="flex flex-row items-center justify-between fixed !w-full p-5 bg-slate-900 text-white lg:hidden">
+<div class="flex flex-row items-center justify-between fixed !w-full p-5 bg-slate-900 text-white lg:hidden z-10">
     <h3 class="!m-0">Baranggay Medicare</h3>
     <fa-icon [icon]="faBars" (click)="navToggle()"></fa-icon>
 </div>
 
-<div class="block lg:hidden fixed !w-full !h-full top-0 left-0 bg-[#000000ab]" (click)="navToggle()" *ngIf="isNavOpen"></div>
+<div class="block lg:hidden fixed !w-full !h-full top-0 left-0 bg-[#000000ab] z-20" (click)="navToggle()" *ngIf="isNavOpen"></div>
 
-<div class="hidden lg:block relative w-[260px] p-5 bg-white h-full z-10" [ngClass]="{'!block': isNavOpen}">
+<div class="hidden lg:block fixed w-[260px] p-5 bg-white h-full z-30" [ngClass]="{'!block': isNavOpen}">
     <!-- bg-[#064f32]  -->
     <img src="../../../assets/images/logo.png" alt="logo.png" width="100" class="m-auto hidden lg:block">
 
