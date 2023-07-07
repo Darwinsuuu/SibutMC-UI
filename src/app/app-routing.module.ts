@@ -5,6 +5,7 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { EmployeesComponent } from './pages/employees/employees.component';
 import { AppointmentsComponent } from './pages/appointments/appointments.component';
+import { PatientsComponent } from './pages/patients/patients.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'employees', component: EmployeesComponent },
   { path: 'appointment', component: AppointmentsComponent },
+  { path: 'patients', component: PatientsComponent },
   { path: '',   redirectTo: '/dashboard', pathMatch: 'full' },
 ];
 

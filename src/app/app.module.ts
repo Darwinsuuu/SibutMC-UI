@@ -50,6 +50,9 @@ import { AllAppointmentsComponent } from './components/appointments/all-appointm
 import { ApprovedAppointmentsComponent } from './components/appointments/approved-appointments/approved-appointments.component';
 import { DeclinedAppointmentsComponent } from './components/appointments/declined-appointments/declined-appointments.component';
 import { ModalDeclineAppointmentComponent } from './components/modal/modal-decline-appointment/modal-decline-appointment.component';
+import { PatientsComponent } from './pages/patients/patients.component';
+import { ManagePatientsComponent } from './components/patients/manage-patients/manage-patients.component';
+import { ModalApproveAppointmentComponent } from './components/modal/modal-approve-appointment/modal-approve-appointment.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +76,10 @@ import { ModalDeclineAppointmentComponent } from './components/modal/modal-decli
     AllAppointmentsComponent,
     ApprovedAppointmentsComponent,
     DeclinedAppointmentsComponent,
-    ModalDeclineAppointmentComponent
+    ModalDeclineAppointmentComponent,
+    PatientsComponent,
+    ManagePatientsComponent,
+    ModalApproveAppointmentComponent
   ],
   imports: [
     BrowserModule,

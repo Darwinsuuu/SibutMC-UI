@@ -8,6 +8,7 @@ import { appointmentList } from '../dummyAppointments';
 import { appointments } from 'src/app/_models/AppointmentModel';
 import { faCheck, faXmark, faBell } from '@fortawesome/free-solid-svg-icons';
 import { ModalDeclineAppointmentComponent } from '../../modal/modal-decline-appointment/modal-decline-appointment.component';
+import { ModalApproveAppointmentComponent } from '../../modal/modal-approve-appointment/modal-approve-appointment.component';
 
 @Component({
   selector: 'app-pending-appointments',
@@ -53,13 +54,26 @@ export class PendingAppointmentsComponent implements AfterViewInit, OnInit {
 
   approveAppointment(id: number) {
 
-    // api call here
 
-    this.snackBar.open("Successfully approved!", "", {
-      duration: 3000,
-      verticalPosition: "top",
-      panelClass: ['success-snackbar']
+    this.dialog.open(ModalApproveAppointmentComponent, {
+      data: { appointmentId: id },
+      height: "fit-content",
+      maxHeight: "calc(100vh - 10px)"
+    }).afterClosed().subscribe((res:any) => {
+
+      if(res) {
+        // api call here
+  
+        this.snackBar.open("Successfully approved!", "", {
+          duration: 3000,
+          verticalPosition: "top",
+          panelClass: ['success-snackbar']
+        })
+      }
+
     })
+
+    
     
   }
 

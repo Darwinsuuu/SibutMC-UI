@@ -1,0 +1,30 @@
+<div class="w-[100%] max-w-[400px] shadow-lg p-5">
+
+    <h1 class="!font-semibold">Approve An Appointment</h1>
+    <p>Please fill all the require fields</p>
+
+    <br>
+
+    <form [formGroup]="formData">
+        <mat-form-field appearance="outline" class="!w-[100%]">
+            <mat-label>Time Appointed</mat-label>
+            <input matInput type="time" formControlName="time">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="!w-[100%]">
+            <mat-label>Physician</mat-label>
+            <mat-select formControlName="physician">
+                <mat-option value="Male">Doctor 1</mat-option>
+                <mat-option value="Female">Doctor 2</mat-option>
+                <mat-option value="Female">Doctor 3</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+
+
+    <div class="flex flex-row items-center justify-end gap-3 mt-5">
+        <button mat-raised-button [mat-dialog-close]="false" class="hover:!bg-slate-300">Close</button>
+        <button mat-raised-button [mat-dialog-close]="formData.value" [disabled]="formData.invalid" color="primary">Approve</button>
+    </div>
+
+</div>

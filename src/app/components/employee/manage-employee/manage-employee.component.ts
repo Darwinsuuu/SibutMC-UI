@@ -50,10 +50,10 @@ export class ManageEmployeeComponent implements AfterViewInit {
 
   openArchiveEmployee(id: number) {
 
-    let username = staffList.find(x => x.id === id)?.username;
+    let fullname = staffList.find(x => x.id === id)?.fullname;
 
     this.dialog.open(ModalArchiveEmployeeComponent, {
-      data: { employeeUsername: username }
+      data: { employeeFullname: fullname }
     }).afterClosed().subscribe((res: boolean) => {
       console.log(res)
       if(res) {

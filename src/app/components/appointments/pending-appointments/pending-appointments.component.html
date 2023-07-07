@@ -1,8 +1,8 @@
 <div class="py-5">
 
     <mat-form-field appearance="outline" class="!w-full md:max-w-[300px] float-right">
-        <mat-label>Search employee</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="ID, Name, Username, Position" #input>
+        <mat-label>Search Patient</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Patient name" #input>
     </mat-form-field>
 
     <div class="overflow-x: auto;">
@@ -55,7 +55,7 @@
 
             <!-- Row shown when there is no matching data. -->
             <tr class="mat-row" *matNoDataRow>
-                <td class="mat-cell" colspan="4">
+                <td class="mat-cell" colspan="7">
                     <p class="!m-0 !py-3 bg-slate-300 text-center">No data matching the filter "{{input.value}}"</p>
                 </td>
             </tr>

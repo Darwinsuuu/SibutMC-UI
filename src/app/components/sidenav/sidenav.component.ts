@@ -18,7 +18,7 @@ export class SidenavComponent implements OnInit {
         {navName: "Dashboard", navLink: "/dashboard", icon: faHome},
         {navName: "Employees", navLink: "/employees", icon: faUserGroup},
         {navName: "Appointments", navLink: "/appointment", icon: faCalendarCheck},
-        {navName: "Patients", navLink: "/test", icon: faHospitalUser},
+        {navName: "Patients", navLink: "/patients", icon: faHospitalUser},
         {navName: "Activity Log", navLink: "/test", icon: faClipboardList},
       ]
     },
@@ -26,15 +26,16 @@ export class SidenavComponent implements OnInit {
     // {
     //   category: "Staff",
     //   nav: [
-    //     {navName: "Appointments", navLink: "/test", icon: faCalendarCheck},
-    //     {navName: "Patients", navLink: "/test", icon: faHospitalUser},
+    //     {navName: "Dashboard", navLink: "/dashboard", icon: faHome},
+    //     {navName: "Appointments", navLink: "/appointment", icon: faCalendarCheck},
+    //     {navName: "Patients", navLink: "/patients", icon: faHospitalUser},
     //   ]
     // },
 
     // {
     //   category: "Patient",
     //   nav: [
-    //     {navName: "Appointments", navLink: "/test", icon: faCalendarCheck},
+    //     {navName: "Appointments", navLink: "/appointment", icon: faCalendarCheck},
     //     {navName: "Medical Record", navLink: "/test", icon: faHospitalUser},
     //   ]
     // },
@@ -42,7 +43,7 @@ export class SidenavComponent implements OnInit {
     {
       category: "Account",
       nav: [
-        {navName: "Account Settings", navLink: "/test", icon: faUserGear},
+        // {navName: "Account Settings", navLink: "/test", icon: faUserGear},
         {navName: "Logout", navLink: "/test", icon: faRightFromBracket},
       ]
     },

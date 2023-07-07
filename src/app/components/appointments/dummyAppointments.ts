@@ -6,6 +6,7 @@ export const appointmentList = [
         "appointed_time": "09:00 AM",
         "appointed_date": "2023-07-10",
         "medical_reason": "General check-up",
+        "decline_reason": "Some reason",
         "statusName": "Pending",
         "status": 1,
         "date_created": "2023-07-07T10:30:00Z"
@@ -17,6 +18,7 @@ export const appointmentList = [
         "appointed_time": "10:30 AM",
         "appointed_date": "2023-07-11",
         "medical_reason": "Follow-up appointment",
+        "decline_reason": "Some reason",
         "statusName": "Declined",
         "status": 0,
         "date_created": "2023-07-07T11:45:00Z"
@@ -28,6 +30,7 @@ export const appointmentList = [
         "appointed_time": "02:00 PM",
         "appointed_date": "2023-07-12",
         "medical_reason": "Blood test",
+        "decline_reason": "Some reason",
         "statusName": "Approved",
         "status": 2,
         "date_created": "2023-07-07T13:20:00Z"
@@ -39,6 +42,7 @@ export const appointmentList = [
         "appointed_time": "11:30 AM",
         "appointed_date": "2023-07-13",
         "medical_reason": "Dental cleaning",
+        "decline_reason": "Some reason",
         "statusName": "Completed",
         "status": 3,
         "date_created": "2023-07-07T15:10:00Z"
@@ -50,6 +54,7 @@ export const appointmentList = [
         "appointed_time": "03:30 PM",
         "appointed_date": "2023-07-14",
         "medical_reason": "Eye examination",
+        "decline_reason": "Some reason",
         "statusName": "Approved",
         "status": 2,
         "date_created": "2023-07-07T16:45:00Z"
@@ -61,6 +66,7 @@ export const appointmentList = [
         "appointed_time": "08:45 AM",
         "appointed_date": "2023-07-15",
         "medical_reason": "Vaccination",
+        "decline_reason": "Some reason",
         "statusName": "Pending",
         "status": 1,
         "date_created": "2023-07-07T17:55:00Z"
@@ -72,6 +78,7 @@ export const appointmentList = [
         "appointed_time": "10:00 AM",
         "appointed_date": "2023-07-16",
         "medical_reason": "Physical therapy",
+        "decline_reason": "Some reason",
         "statusName": "Completed",
         "status": 3,
         "date_created": "2023-07-07T18:30:00Z"
@@ -83,6 +90,7 @@ export const appointmentList = [
         "appointed_time": "01:30 PM",
         "appointed_date": "2023-07-17",
         "medical_reason": "X-ray",
+        "decline_reason": "Some reason",
         "statusName": "Approved",
         "status": 2,
         "date_created": "2023-07-07T19:15:00Z"
@@ -94,6 +102,7 @@ export const appointmentList = [
         "appointed_time": "10:45 AM",
         "appointed_date": "2023-07-18",
         "medical_reason": "Dermatology consultation",
+        "decline_reason": "Some reason",
         "statusName": "Declined",
         "status": 0,
         "date_created": "2023-07-07T20:00:00Z"
@@ -105,6 +114,7 @@ export const appointmentList = [
         "appointed_time": "11:15 AM",
         "appointed_date": "2023-07-19",
         "medical_reason": "Allergy testing",
+        "decline_reason": "Some reason",
         "statusName": "Pending",
         "status": 1,
         "date_created": "2023-07-07T20:45:00Z"
@@ -116,6 +126,7 @@ export const appointmentList = [
         "appointed_time": "03:00 PM",
         "appointed_date": "2023-07-20",
         "medical_reason": "Psychology session",
+        "decline_reason": "Some reason",
         "statusName": "Completed",
         "status": 3,
         "date_created": "2023-07-07T21:30:00Z"
@@ -127,6 +138,7 @@ export const appointmentList = [
         "appointed_time": "09:30 AM",
         "appointed_date": "2023-07-21",
         "medical_reason": "Counseling",
+        "decline_reason": "Some reason",
         "statusName": "Approved",
         "status": 2,
         "date_created": "2023-07-07T22:15:00Z"
@@ -138,6 +150,7 @@ export const appointmentList = [
         "appointed_time": "02:45 PM",
         "appointed_date": "2023-07-22",
         "medical_reason": "Pediatric check-up",
+        "decline_reason": "Some reason",
         "statusName": "Completed",
         "status": 3,
         "date_created": "2023-07-07T23:00:00Z"
@@ -149,6 +162,7 @@ export const appointmentList = [
         "appointed_time": "12:00 PM",
         "appointed_date": "2023-07-23",
         "medical_reason": "Physical examination",
+        "decline_reason": "Some reason",
         "statusName": "Pending",
         "status": 1,
         "date_created": "2023-07-08T00:30:00Z"
@@ -160,6 +174,7 @@ export const appointmentList = [
         "appointed_time": "10:15 AM",
         "appointed_date": "2023-07-24",
         "medical_reason": "Orthopedic consultation",
+        "decline_reason": "Some reason",
         "statusName": "Pending",
         "status": 1,
         "date_created": "2023-07-08T01:45:00Z"

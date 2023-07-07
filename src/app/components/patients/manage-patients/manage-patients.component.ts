@@ -4,30 +4,31 @@ import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { appointmentList } from '../dummyAppointments';
 import { appointments } from 'src/app/_models/AppointmentModel';
 import { faCheck, faXmark, faBell } from '@fortawesome/free-solid-svg-icons';
+import { PatientList } from 'src/app/_models/PatientModel';
+import { patients } from '../patients';
 
 @Component({
-  selector: 'app-declined-appointments',
-  templateUrl: './declined-appointments.component.html',
-  styleUrls: ['./declined-appointments.component.scss']
+  selector: 'app-manage-patients',
+  templateUrl: './manage-patients.component.html',
+  styleUrls: ['./manage-patients.component.scss']
 })
-export class DeclinedAppointmentsComponent implements AfterViewInit, OnInit {
+export class ManagePatientsComponent implements AfterViewInit, OnInit {
   faCheck = faCheck;
   faXmark = faXmark;
   faBell = faBell;
 
 
-  displayedColumns: string[] = ['patientFullname', 'appointed_time', 'appointed_date', 'medical_reason', 'decline_reason', 'statusName', 'date_created'];
-  dataSource: MatTableDataSource<appointments>;
+  displayedColumns: string[] = ['fullname', 'marital_status', 'gender', 'email', 'contact_no', 'action'];
+  dataSource: MatTableDataSource<PatientList>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private dialog: MatDialog,  
               private snackBar: MatSnackBar) {
-    this.dataSource = new MatTableDataSource(appointmentList.filter(x => x.status === 0));
+    this.dataSource = new MatTableDataSource(patients);
   }
 
   ngOnInit(): void {
@@ -46,4 +47,5 @@ export class DeclinedAppointmentsComponent implements AfterViewInit, OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
 }
