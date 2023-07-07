@@ -31,8 +31,6 @@ export class DeclinedAppointmentsComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit(): void {
-    
-    console.log(appointmentList.filter(x => x.status === 1));
   }
 
   ngAfterViewInit() {

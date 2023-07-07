@@ -1,0 +1,18 @@
+<div class="w-[100%] max-w-[400px] shadow-lg p-5">
+
+    <h1 class="!font-semibold">Decline Appointment</h1>
+    <p>Please tell why do you want to cancel {{ data?.patientName }}'s appointment?</p>
+
+    <br>
+
+    <mat-form-field appearance="outline" class="!w-[100%]">
+        <mat-label>Reason of decline</mat-label>
+        <textarea matInput rows="5" placeholder="Enter message here..." [(ngModel)]="reason"></textarea>
+    </mat-form-field>
+
+    <div class="flex flex-row items-center justify-end gap-3 mt-5">
+        <button mat-raised-button [mat-dialog-close]="false" class="hover:!bg-slate-300">Cancel</button>
+        <button mat-raised-button [mat-dialog-close]="reason" [disabled]="!reason" class="!px-5 !text-white !bg-red-600 hover:!bg-red-800">Decline</button>
+    </div>
+
+</div>

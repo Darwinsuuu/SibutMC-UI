@@ -49,6 +49,7 @@ import { CompletedAppointmentsComponent } from './components/appointments/comple
 import { AllAppointmentsComponent } from './components/appointments/all-appointments/all-appointments.component';
 import { ApprovedAppointmentsComponent } from './components/appointments/approved-appointments/approved-appointments.component';
 import { DeclinedAppointmentsComponent } from './components/appointments/declined-appointments/declined-appointments.component';
+import { ModalDeclineAppointmentComponent } from './components/modal/modal-decline-appointment/modal-decline-appointment.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { DeclinedAppointmentsComponent } from './components/appointments/decline
     CompletedAppointmentsComponent,
     AllAppointmentsComponent,
     ApprovedAppointmentsComponent,
-    DeclinedAppointmentsComponent
+    DeclinedAppointmentsComponent,
+    ModalDeclineAppointmentComponent
   ],
   imports: [
     BrowserModule,

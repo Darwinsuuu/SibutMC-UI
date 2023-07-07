@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { appointmentList } from '../dummyAppointments';
 import { appointments } from 'src/app/_models/AppointmentModel';
 import { faCheck, faXmark, faBell } from '@fortawesome/free-solid-svg-icons';
+import { ModalDeclineAppointmentComponent } from '../../modal/modal-decline-appointment/modal-decline-appointment.component';
 
 @Component({
   selector: 'app-pending-appointments',
@@ -32,8 +33,7 @@ export class PendingAppointmentsComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit(): void {
-    
-    console.log(appointmentList.filter(x => x.status === 1));
+  
   }
 
   ngAfterViewInit() {
@@ -48,6 +48,49 @@ export class PendingAppointmentsComponent implements AfterViewInit, OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+
+  approveAppointment(id: number) {
+
+    // api call here
+
+    this.snackBar.open("Successfully approved!", "", {
+      duration: 3000,
+      verticalPosition: "top",
+      panelClass: ['success-snackbar']
+    })
+    
+  }
+
+
+  declineAppointment(id: number) {
+
+    let name = appointmentList.find(x => x.id === id)?.patientFullname;
+
+    this.dialog.open(ModalDeclineAppointmentComponent, {
+      data: { patientName: name },
+      height: "fit-content",
+      maxHeight: "calc(100vh - 10px)"
+    }).afterClosed().subscribe((res: any) => {
+
+      if(res) {
+
+        let reason = res;
+        
+        // api call here
+        this.snackBar.open("Appointment was succefully declined!", "", {
+          duration: 3000,
+          verticalPosition: "top",
+          panelClass: ['success-snackbar']
+        })
+
+      }
+
+    })
+
+
+
   }
 
 }
