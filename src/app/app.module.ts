@@ -43,6 +43,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ModalEditEmployeeComponent } from './components/modal/modal-edit-employee/modal-edit-employee.component';
+import { AppointmentsComponent } from './pages/appointments/appointments.component';
+import { PendingAppointmentsComponent } from './components/appointments/pending-appointments/pending-appointments.component';
+import { CompletedAppointmentsComponent } from './components/appointments/completed-appointments/completed-appointments.component';
+import { AllAppointmentsComponent } from './components/appointments/all-appointments/all-appointments.component';
+import { ApprovedAppointmentsComponent } from './components/appointments/approved-appointments/approved-appointments.component';
+import { DeclinedAppointmentsComponent } from './components/appointments/declined-appointments/declined-appointments.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +65,13 @@ import { ModalEditEmployeeComponent } from './components/modal/modal-edit-employ
     ManageEmployeeComponent,
     NewEmployeeComponent,
     ModalArchiveEmployeeComponent,
-    ModalEditEmployeeComponent
+    ModalEditEmployeeComponent,
+    AppointmentsComponent,
+    PendingAppointmentsComponent,
+    CompletedAppointmentsComponent,
+    AllAppointmentsComponent,
+    ApprovedAppointmentsComponent,
+    DeclinedAppointmentsComponent
   ],
   imports: [
     BrowserModule,

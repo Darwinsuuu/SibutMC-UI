@@ -21,9 +21,7 @@ export class NewEmployeeComponent {
     firstname: ["", [Validators.required, Validators.pattern(/^[A-Za-z -]+$/)]],
     middlename: ["", [Validators.pattern(/^[A-Za-z -]+$/)]],
     lastname: ["", [Validators.required, Validators.pattern(/^[A-Za-z -]+$/)]],
-    position: ["", [Validators.required]],
-    username: ["", [Validators.required,  Validators.minLength(6), Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+$/)],],
-    password: ["", [Validators.required, Validators.minLength(6)]]
+    position: ["", [Validators.required]]
   })
 
   isPasswordVisible: boolean = false;

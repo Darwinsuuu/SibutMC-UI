@@ -22,7 +22,7 @@ export class ManageEmployeeComponent implements AfterViewInit {
   faPencil = faPencil;
   faTrashCan = faTrashCan;
 
-  displayedColumns: string[] = ['username', 'fullname', 'position', 'action'];
+  displayedColumns: string[] = ['fullname', 'position', 'action'];
   dataSource: MatTableDataSource<EmployeeList>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -80,8 +80,6 @@ export class ManageEmployeeComponent implements AfterViewInit {
       middlename: "correa",
       lastname: "paglinawan",
       position: "Barangay Health Worker (BHW)",
-      username: "paglica",
-      password: "testpassword"
     }
 
     this.dialog.open(ModalEditEmployeeComponent, {

@@ -1,0 +1,29 @@
+<div class="relative top-10 py-10 px-5 w-[100vw] lg:pl-[280px]">
+    <app-header [title]="pageTitle"></app-header>
+
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center" animationDuration="500ms" class="mt-5"
+        selectedIndex="2">
+
+        <mat-tab label="All" class="!font-semibold">
+            <app-all-appointments></app-all-appointments>
+        </mat-tab>
+        
+        <mat-tab label="Completed" class="!font-semibold">
+            <app-completed-appointments></app-completed-appointments>
+        </mat-tab>
+        
+        <mat-tab label="Pending" class="!font-semibold">
+            <app-pending-appointments></app-pending-appointments>
+        </mat-tab>
+
+        <mat-tab label="Approved" class="!font-semibold">
+            <app-approved-appointments></app-approved-appointments>
+        </mat-tab>
+
+        <mat-tab label="Declined" class="!font-semibold">
+            <app-declined-appointments></app-declined-appointments>
+        </mat-tab>
+
+
+    </mat-tab-group>
+</div>

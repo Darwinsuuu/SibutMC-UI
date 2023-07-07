@@ -20,9 +20,7 @@ export class ModalEditEmployeeComponent implements OnInit {
     firstname: [this.data.credentials?.firstname, [Validators.required, Validators.pattern(/^[A-Za-z -]+$/)]],
     middlename: [this.data.credentials?.middlename, [Validators.pattern(/^[A-Za-z -]+$/)]],
     lastname: [this.data.credentials?.lastname, [Validators.required, Validators.pattern(/^[A-Za-z -]+$/)]],
-    position: [this.data.credentials?.position, [Validators.required]],
-    username: [this.data.credentials?.username, [Validators.required, Validators.minLength(6), Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+$/)]],
-    password: [this.data.credentials?.password, [Validators.required, Validators.minLength(6)]]
+    position: [this.data.credentials?.position, [Validators.required]]
   })
 
   isPasswordVisible: boolean = false;
