@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from "@angular/platform-browser";
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { ModalTermsConditionsComponent } from 'src/app/components/modal-terms-conditions/modal-terms-conditions.component';
-import { ModalForgotPasswordComponent } from 'src/app/components/modal-forgot-password/modal-forgot-password.component';
+import { ModalTermsConditionsComponent } from 'src/app/components/modal/modal-terms-conditions/modal-terms-conditions.component';
+import { ModalForgotPasswordComponent } from 'src/app/components/modal/modal-forgot-password/modal-forgot-password.component';
 import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UserLogin } from 'src/app/_models/UserModel';

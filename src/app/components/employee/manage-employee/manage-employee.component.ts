@@ -4,48 +4,13 @@ import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
-
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  fruit: string;
-}
-
-/** Constants used to fill up our data base. */
-const FRUITS: string[] = [
-  'blueberry',
-  'lychee',
-  'kiwi',
-  'mango',
-  'peach',
-  'lime',
-  'pomegranate',
-  'pineapple',
-];
-const NAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
-
+import { staffList } from './dummy';
+import { EmployeeList } from 'src/app/_models/EmployeeModel';
+import { faPencil, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { ModalArchiveEmployeeComponent } from '../../modal/modal-archive-employee/modal-archive-employee.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ModalEditEmployeeComponent } from '../../modal/modal-edit-employee/modal-edit-employee.component';
 
 @Component({
   selector: 'app-manage-employee',
@@ -53,18 +18,19 @@ const NAMES: string[] = [
   styleUrls: ['./manage-employee.component.scss']
 })
 export class ManageEmployeeComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
-  dataSource: MatTableDataSource<UserData>;
+
+  faPencil = faPencil;
+  faTrashCan = faTrashCan;
+
+  displayedColumns: string[] = ['username', 'fullname', 'position', 'action'];
+  dataSource: MatTableDataSource<EmployeeList>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor() {
-    // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
-
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+  constructor(private dialog: MatDialog,  
+              private snackBar: MatSnackBar) {
+    this.dataSource = new MatTableDataSource(staffList);
   }
 
   ngAfterViewInit() {
@@ -80,20 +46,59 @@ export class ManageEmployeeComponent implements AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
-}
 
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name =
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-    ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-    '.';
 
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
-  };
+  openArchiveEmployee(id: number) {
+
+    let username = staffList.find(x => x.id === id)?.username;
+
+    this.dialog.open(ModalArchiveEmployeeComponent, {
+      data: { employeeUsername: username }
+    }).afterClosed().subscribe((res: boolean) => {
+      console.log(res)
+      if(res) {
+        // api call here
+
+        this.snackBar.open("Account was successfully deleted!", "", {
+          duration: 3000,
+          verticalPosition: "top",
+          panelClass: "danger-snackbar"
+        });
+      } else {
+        
+      }
+    })
+  }
+
+
+
+  openEditEmployee(id: number) {
+    
+    let dummyCred = {
+      id: 1,
+      firstname: "carty king",
+      middlename: "correa",
+      lastname: "paglinawan",
+      position: "Barangay Health Worker (BHW)",
+      username: "paglica",
+      password: "testpassword"
+    }
+
+    this.dialog.open(ModalEditEmployeeComponent, {
+      data: { credentials: dummyCred },
+      height: "fit-content",
+      maxHeight: "calc(100vh - 10px)"
+    }).afterClosed().subscribe((res: any) => {
+      if(res) {
+        // api call here
+
+        this.snackBar.open("Successfully updated!", "", {
+          duration: 3000,
+          verticalPosition: "top",
+          panelClass: "success-snackbar"
+        })
+      }
+    })
+
+  }
 }

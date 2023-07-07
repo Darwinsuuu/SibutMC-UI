@@ -1,0 +1,88 @@
+<div class="py-5">
+
+    <form [formGroup]="employeeCredentials" (ngSubmit)="submitEmployeeCredentials(employeeCredentials.value)" #myForm="ngForm">
+
+
+        <div class="grid grid-cols-1 xl:grid-cols-2 items-center xl:gap-40 xl:p-16">
+            <div class="">
+                <img src="../../../../assets/images/undraw_medical_care_movn.svg" class="hidden lg:block m-auto"
+                    width="250" alt="">
+                <br>
+                <h3 class="!text-2xl !font-semibold">New Employee Information</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus consequatur nemo beatae, tempora
+                    earum atque possimus quis inventore, dolorem error sit? Excepturi dolor qui ullam?</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, iure eos, illum nobis pariatur
+                    voluptate obcaecati vel fuga reprehenderit quidem ratione officiis earum suscipit laborum amet,
+                    explicabo distinctio dolore odio saepe eaque laboriosam ab. Sit veniam delectus harum dolor est quo
+                    adipisci. Iusto, obcaecati tempore.</p>
+            </div>
+
+            <div class="lg:col-span-1">
+                <b>Employee Details</b>
+
+                <br>
+                <br>
+
+                <div class="grid grid-cols-1 gap-2 md:grid-cols-2">
+                    <mat-form-field appearance="outline" class="!w-[100%]">
+                        <mat-label>Firstname</mat-label>
+                        <input matInput placeholder="" formControlName="firstname">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="!w-[100%]">
+                        <mat-label>Middlename</mat-label>
+                        <input matInput placeholder="" formControlName="middlename">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="!w-[100%] md:col-span-2">
+                        <mat-label>Lastname</mat-label>
+                        <input matInput placeholder="" formControlName="lastname">
+                    </mat-form-field>
+                </div>
+
+                <div class="gri grid-cols-1 gap-2">
+                    <mat-form-field appearance="outline" class="!w-[100%]">
+                        <mat-label>Select position</mat-label>
+                        <mat-select formControlName="position">
+                            <mat-option value="Barangay Health Worker (BHW)">Barangay Health Worker (BHW)</mat-option>
+                            <mat-option value="Community Health Worker (CHW)">Community Health Worker (CHW)</mat-option>
+                            <mat-option value="Nurse">Nurse</mat-option>
+                            <mat-option value="Midwife">Midwife</mat-option>
+                            <mat-option value="Dentist">Dentist</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+
+                <b>Account Details</b>
+
+                <br>
+                <br>
+
+                <div class="grid grid-cols-1 gap-2">
+                    <mat-form-field appearance="outline" class="!w-[100%]">
+                        <mat-label>Username</mat-label>
+                        <input matInput placeholder="" formControlName="username">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="!w-[100%]">
+                        <mat-label>Password</mat-label>
+                        <input matInput placeholder="" type="{{ isPasswordVisible ? 'text' : 'password' }}" formControlName="password">
+                        <mat-icon *ngIf="this.employeeCredentials.get('password')?.value" matSuffix (click)="showPassword()">{{ isPasswordVisible ? "visibility" :
+                            "visibility_off"
+                            }}</mat-icon>
+                    </mat-form-field>
+                </div>
+
+                <button mat-raised-button color="primary" class="!w-full !p-7">Submit</button>
+
+            </div>
+
+        </div>
+
+
+
+
+    </form>
+
+</div>

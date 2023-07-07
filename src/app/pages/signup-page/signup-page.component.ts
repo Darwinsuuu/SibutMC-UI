@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { ModalSignupOtpComponent } from 'src/app/components/modal-signup-otp/modal-signup-otp.component';
+import { ModalSignupOtpComponent } from 'src/app/components/modal/modal-signup-otp/modal-signup-otp.component';
 import {MatDialog, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
 
 @Component({

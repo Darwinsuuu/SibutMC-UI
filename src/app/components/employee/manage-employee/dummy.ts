@@ -1,0 +1,58 @@
+export const staffList = [
+    {
+        id: 1,
+        username: "paglica",
+        fullname: "Carty King Correa Paglinawan",
+        position: "Barangay Health Worker (BHW)",
+        date_created: "July 7, 2023",
+    },
+    {
+        id: 1,
+        username: "paglica",
+        fullname: "Carty King Correa Paglinawan",
+        position: "Barangay Health Worker (BHW)",
+        date_created: "July 7, 2023",
+    },
+    {
+        id: 1,
+        username: "paglica",
+        fullname: "Carty King Correa Paglinawan",
+        position: "Barangay Health Worker (BHW)",
+        date_created: "July 7, 2023",
+    },
+    {
+        id: 1,
+        username: "paglica",
+        fullname: "Carty King Correa Paglinawan",
+        position: "Barangay Health Worker (BHW)",
+        date_created: "July 7, 2023",
+    },
+    {
+        id: 1,
+        username: "paglica",
+        fullname: "Carty King Correa Paglinawan",
+        position: "Barangay Health Worker (BHW)",
+        date_created: "July 7, 2023",
+    },
+    {
+        id: 1,
+        username: "paglica",
+        fullname: "Carty King Correa Paglinawan",
+        position: "Barangay Health Worker (BHW)",
+        date_created: "July 7, 2023",
+    },
+    {
+        id: 1,
+        username: "paglica",
+        fullname: "Carty King Correa Paglinawan",
+        position: "Barangay Health Worker (BHW)",
+        date_created: "July 7, 2023",
+    },
+    {
+        id: 1,
+        username: "paglica",
+        fullname: "Carty King Correa Paglinawan",
+        position: "Barangay Health Worker (BHW)",
+        date_created: "July 7, 2023",
+    },
+]

@@ -2,9 +2,14 @@
     <app-header [title]="pageTitle"></app-header>
 
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center" animationDuration="500ms" class="mt-5">
+        
         <mat-tab label="Manage Employees" class="!font-semibold">
             <app-manage-employee></app-manage-employee>
         </mat-tab>
-        <mat-tab label="New Employees" class="!font-semibold">Content 2</mat-tab>
+
+        <mat-tab label="New Employees" class="!font-semibold">
+            <app-new-employee></app-new-employee>
+        </mat-tab>
+
     </mat-tab-group>
 </div>
