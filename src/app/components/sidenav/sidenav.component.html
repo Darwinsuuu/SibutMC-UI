@@ -15,15 +15,17 @@
             <ng-container *ngFor="let cat of navList">
 
 
-                <p class="font-bold text-slate-500 !mb-3 !mt-8">{{ cat.category }}</p>
+                <p class="font-bold text-slate-500 !mb-3 !mt-8" *ngIf="cat.module === access || cat.module === 0">{{ cat.category }}</p>
 
                 <li class="mb-1" *ngFor="let nav of cat.nav">
-                    <a [routerLink]="nav.navLink" routerLinkActive="bg-[#3f51b5] text-white transition-all" class="block px-5 py-4 w-full rounded-lg hover:bg-[#3f51b5] hover:text-white hover:transition-all">
-                        <div class="flex flex-row gap-3">
-                            <fa-icon [icon]="nav.icon"></fa-icon>
-                            <span class="font-semibold">{{ nav.navName }}</span>
-                        </div>
-                    </a>
+                    <ng-container *ngIf="nav.accessModule === access || nav.accessModule === 0">
+                        <a [routerLink]="nav.navLink" routerLinkActive="bg-[#3f51b5] text-white transition-all" class="block px-5 py-4 w-full rounded-lg hover:bg-[#3f51b5] hover:text-white hover:transition-all">
+                            <div class="flex flex-row gap-3">
+                                <fa-icon [icon]="nav.icon"></fa-icon>
+                                <span class="font-semibold">{{ nav.navName }}</span>
+                            </div>
+                        </a>
+                    </ng-container>
                 </li>
 
 

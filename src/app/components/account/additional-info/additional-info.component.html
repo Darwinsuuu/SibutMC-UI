@@ -1,0 +1,73 @@
+<div class="py-5">
+
+    <div class="grid grid-cols-1 gap-10 lg:grid-cols-2 items-start mt-8">
+
+        <div class="p-5 rounded shadow-lg border-2">
+            <form [formGroup]="contactInfo" (ngSubmit)="updateContactInfo(contactInfo.value)">
+
+                <h3 class="!text-lg !font-bold">My Contact Infomation</h3>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis, aut sunt sequi molestiae error
+                    inventore!</p>
+
+                <div class="py-3">
+                    <div class="grid grid-cols-1 md:grid-cols-1 gap-2">
+                        <mat-form-field appearance="outline" class="!w-[100%]">
+                            <mat-label>Contact No.</mat-label>
+                            <input autocomplete="off" matInput placeholder="Ex. 09228215465"
+                                formControlName="contact_no">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="!w-[100%]">
+                            <mat-label>Email Address</mat-label>
+                            <input autocomplete="off" matInput placeholder="" formControlName="email">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="!w-[100%]">
+                            <mat-label>Address</mat-label>
+                            <textarea matInput rows="5" placeholder="Street, Subdivision, City, Province"
+                                formControlName="address"></textarea>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="text-right">
+                        <button mat-raised-button color="primary" class="!px-9">Update</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        
+        <div class="p-5 rounded shadow-lg border-2">
+            <form [formGroup]="emergencyContactInfo" (ngSubmit)="updateEmergencyInfo(emergencyContactInfo.value)">
+
+                <h3 class="!text-lg !font-bold">Contact In Case of Emergency</h3>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis, aut sunt sequi molestiae error
+                    inventore!</p>
+
+                <div class="py-3">
+
+                    <div class="grid grid-cols-1 md:grid-cols-1 gap-2">
+                        <mat-form-field appearance="outline" class="!w-[100%]">
+                            <mat-label>Fullname</mat-label>
+                            <input autocomplete="off" matInput placeholder="" formControlName="fullname">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="!w-[100%]">
+                            <mat-label>Contact No.</mat-label>
+                            <input autocomplete="off" matInput placeholder="Ex. 09228215465"
+                                formControlName="emergency_contact_no">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="text-right">
+                        <button mat-raised-button color="primary" class="!px-9">Update</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+</div>

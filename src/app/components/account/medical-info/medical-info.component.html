@@ -1,0 +1,69 @@
+<div class="py-5">
+
+    <div class="grid grid-cols-1 gap-10 md:grid-cols-2 items-start mt-8">
+
+        <div class="p-3">
+            <img src="../../../../assets/images/undraw_doctor_kw-5-l.svg" class="hidden md:block m-auto mb-5" width="400" alt="">
+            <h3 class="!text-2xl !font-bold">My Basic Medical Info</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur ratione beatae aspernatur quis rerum laborum magni mollitia minus! Ex totam quos rem maiores dolores suscipit.</p>
+        </div>
+
+        <div class="p-5 rounded shadow-lg border-2">
+
+            <form [formGroup]="medicalInfo" (ngSubmit)="updateMedicalInfo(medicalInfo.value)">
+
+                <h3 class="!text-lg !font-bold">Personal Infomation</h3>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis, aut sunt sequi molestiae error
+                    inventore!</p>
+
+                <div class="py-3">
+                    <div class="grid grid-cols-1 gap-2">
+                        <mat-form-field appearance="outline" class="!w-[100%]">
+                            <mat-label>Height</mat-label>
+                            <input matInput placeholder="" formControlName="height">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="!w-[100%]">
+                            <mat-label>Weight</mat-label>
+                            <input matInput placeholder=""formControlName="weight">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="!w-[100%]">
+                            <mat-label>Blood Type</mat-label>
+                            <input autocomplete="off" matInput placeholder="" formControlName="blood_type">
+                        </mat-form-field>
+
+                        
+                        <mat-form-field appearance="outline" class="!w-[100%]">
+                            <mat-label>Blood Pressure</mat-label>
+                            <input autocomplete="off" matInput placeholder="" formControlName="blood_pressure">
+                        </mat-form-field>
+
+                        
+                        <mat-form-field appearance="outline" class="!w-[100%]">
+                            <mat-label>Disability</mat-label>
+                            <input autocomplete="off" matInput placeholder="" formControlName="disability">
+                        </mat-form-field>
+
+                        
+                        <mat-form-field appearance="outline" class="!w-[100%]">
+                            <mat-label>Contagious Disease</mat-label>
+                            <input autocomplete="off" matInput placeholder="" formControlName="contigious_disease">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="text-right">
+                        <button mat-raised-button color="primary" class="!px-9">Update</button>
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+    </div>
+
+
+</div>

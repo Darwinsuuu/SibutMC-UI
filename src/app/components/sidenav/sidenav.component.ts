@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faHome, faUserGroup, faCalendarCheck, faHospitalUser, faClipboardList, faRightFromBracket, faUserGear, faBars } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from 'src/app/_services/auth/auth.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -9,42 +10,47 @@ import { faHome, faUserGroup, faCalendarCheck, faHospitalUser, faClipboardList, 
 
 export class SidenavComponent implements OnInit {
 
-  constructor() {}
+  constructor(public auth: AuthService) {}
+
+  access: number = this.auth.userType;
 
   navList: any[] = [
     {
       category: "Admin",
+      module: 1,
       nav: [
-        {navName: "Dashboard", navLink: "/dashboard", icon: faHome},
-        {navName: "Employees", navLink: "/employees", icon: faUserGroup},
-        {navName: "Appointments", navLink: "/appointment", icon: faCalendarCheck},
-        {navName: "Patients", navLink: "/patients", icon: faHospitalUser},
-        {navName: "Activity Log", navLink: "/activity", icon: faClipboardList},
+        {navName: "Dashboard", navLink: "/dashboard", icon: faHome, accessModule: 1},
+        {navName: "Employees", navLink: "/employees", icon: faUserGroup, accessModule: 1},
+        {navName: "Appointments", navLink: "/appointment", icon: faCalendarCheck, accessModule: 1},
+        {navName: "Patients", navLink: "/patients", icon: faHospitalUser, accessModule: 1},
+        {navName: "Activity Log", navLink: "/activity", icon: faClipboardList, accessModule: 1},
       ]
     },
 
-    // {
-    //   category: "Staff",
-    //   nav: [
-    //     {navName: "Dashboard", navLink: "/dashboard", icon: faHome},
-    //     {navName: "Appointments", navLink: "/appointment", icon: faCalendarCheck},
-    //     {navName: "Patients", navLink: "/patients", icon: faHospitalUser},
-    //   ]
-    // },
+    {
+      category: "Staff",
+      module: 2,
+      nav: [
+        {navName: "Dashboard", navLink: "/dashboard", icon: faHome, accessModule: 2},
+        {navName: "Appointments", navLink: "/appointment", icon: faCalendarCheck, accessModule: 2},
+        {navName: "Patients", navLink: "/patients", icon: faHospitalUser, accessModule: 2},
+      ]
+    },
 
-    // {
-    //   category: "Patient",
-    //   nav: [
-    //     {navName: "Appointments", navLink: "/appointment", icon: faCalendarCheck},
-    //     {navName: "Medical Record", navLink: "/record/:id", icon: faHospitalUser},
-    //   ]
-    // },
+    {
+      module: 3,
+      nav: [
+        {navName: "Appointments", navLink: "/appointment", icon: faCalendarCheck, accessModule: 3},
+        {navName: "My Medical Record", navLink: "/record/1", icon: faHospitalUser, accessModule: 3},
+      ]
+    },
     
     {
       category: "Account",
+      module: 0,
       nav: [
-        // {navName: "Account Settings", navLink: "/test", icon: faUserGear},
-        {navName: "Logout", navLink: "/test", icon: faRightFromBracket},
+        {navName: "Account Settings", navLink: "/account", icon: faUserGear, accessModule: 3},
+        {navName: "Logout", navLink: "/logout", icon: faRightFromBracket, accessModule: 0},
       ]
     },
     

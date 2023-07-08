@@ -8,5 +8,6 @@ export class AuthService {
   constructor() { }
   
   isAuth: boolean = false;
+  userType: number = 1;
 
 }

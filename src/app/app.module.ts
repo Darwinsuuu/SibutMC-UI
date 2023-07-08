@@ -55,6 +55,11 @@ import { ManagePatientsComponent } from './components/patients/manage-patients/m
 import { ModalApproveAppointmentComponent } from './components/modal/modal-approve-appointment/modal-approve-appointment.component';
 import { RecordComponent } from './pages/record/record.component';
 import { ActivityLogComponent } from './pages/activity-log/activity-log.component';
+import { AccountSettingsComponent } from './pages/account-settings/account-settings.component';
+import { PersonalInfoComponent } from './components/account/personal-info/personal-info.component';
+import { AdditionalInfoComponent } from './components/account/additional-info/additional-info.component';
+import { MedicalInfoComponent } from './components/account/medical-info/medical-info.component';
+import { LogoutComponent } from './components/account/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +89,11 @@ import { ActivityLogComponent } from './pages/activity-log/activity-log.componen
     ModalApproveAppointmentComponent,
     RecordComponent,
     ActivityLogComponent,
+    AccountSettingsComponent,
+    PersonalInfoComponent,
+    AdditionalInfoComponent,
+    MedicalInfoComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,

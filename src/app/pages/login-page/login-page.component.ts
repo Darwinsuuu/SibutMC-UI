@@ -15,22 +15,22 @@ import { AuthService } from 'src/app/_services/auth/auth.service';
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor(private titleService:Title,
-              private formBuilder:FormBuilder,
-              private dialog:MatDialog,
-              private route:Router,
-              private auth:AuthService) {
+  constructor(private titleService: Title,
+    private formBuilder: FormBuilder,
+    private dialog: MatDialog,
+    private route: Router,
+    private auth: AuthService) {
     this.titleService.setTitle("Sibut Medicare | Login");
   }
 
-  
+
   ngOnInit(): void {
-    if(this.auth.isAuth) {
+    if (this.auth.isAuth) {
       this.route.navigate(['/dashboard']);
     }
   }
 
-  
+
   loginCredentials: FormGroup = this.formBuilder.group({
     username: [''],
     password: [''],
@@ -63,13 +63,25 @@ export class LoginPageComponent implements OnInit {
 
   submitLoginCredentials(credentials: UserLogin) {
 
-    this.validCredentials = false;
-
     // api call here
-    if(credentials.username == 'admin' && credentials.password == 'admin') {
+
+    if (credentials.username == 'admin' && credentials.password == 'admin') {
       this.auth.isAuth = true;
+      this.auth.userType = 1;
       this.validCredentials = true;
       this.route.navigate(['/dashboard'])
+    } else if (credentials.username == 'staff' && credentials.password == 'staff') {
+      this.auth.isAuth = true;
+      this.auth.userType = 2;
+      this.validCredentials = true;
+      this.route.navigate(['/dashboard'])
+    } else if (credentials.username == 'user' && credentials.password == 'user') {
+      this.auth.isAuth = true;
+      this.auth.userType = 2;
+      this.validCredentials = true;
+      this.route.navigate(['/record/1'])
+    } else {
+      this.validCredentials = false;
     }
 
   }

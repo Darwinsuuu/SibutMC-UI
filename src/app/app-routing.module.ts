@@ -8,6 +8,9 @@ import { AppointmentsComponent } from './pages/appointments/appointments.compone
 import { PatientsComponent } from './pages/patients/patients.component';
 import { RecordComponent } from './pages/record/record.component';
 import { ActivityLogComponent } from './pages/activity-log/activity-log.component';
+import { AccountSettingsComponent } from './pages/account-settings/account-settings.component';
+import { LogoutComponent } from './components/account/logout/logout.component';
+
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'create-account', component: SignupPageComponent },
@@ -17,6 +20,8 @@ const routes: Routes = [
   { path: 'patients', component: PatientsComponent },
   { path: 'record/:id', component: RecordComponent },
   { path: 'activity', component: ActivityLogComponent },
+  { path: 'account', component: AccountSettingsComponent },
+  { path: 'logout', component: LogoutComponent },
   { path: '',   redirectTo: '/login', pathMatch: 'full' },
 ];
 
