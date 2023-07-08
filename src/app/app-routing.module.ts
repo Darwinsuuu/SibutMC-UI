@@ -6,7 +6,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { EmployeesComponent } from './pages/employees/employees.component';
 import { AppointmentsComponent } from './pages/appointments/appointments.component';
 import { PatientsComponent } from './pages/patients/patients.component';
-
+import { RecordComponent } from './pages/record/record.component';
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'create-account', component: SignupPageComponent },
@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'employees', component: EmployeesComponent },
   { path: 'appointment', component: AppointmentsComponent },
   { path: 'patients', component: PatientsComponent },
+  { path: 'record/:id', component: RecordComponent },
   { path: '',   redirectTo: '/dashboard', pathMatch: 'full' },
 ];
 

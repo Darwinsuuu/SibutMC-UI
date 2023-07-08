@@ -39,7 +39,7 @@
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns" class="!bg-[#3f51b5] !font-bold !text-white"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="hover:cursor-pointer" [routerLink]="row.userId"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="hover:cursor-pointer" routerLink="/record/{{row.userId}}"></tr>
 
             <!-- Row shown when there is no matching data. -->
             <tr class="mat-row" *matNoDataRow>

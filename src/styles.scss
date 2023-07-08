@@ -105,3 +105,32 @@ tr {
 tr:hover {
     background-color: #d0d0d0 !important;
 }
+
+
+::ng-deep {
+    table {
+        width: 100%;
+      }
+      
+      td.mat-cell {
+        white-space: nowrap;
+      }
+      
+      /* Apply column widths */
+      th.mat-header-cell,
+      td.mat-cell {
+        width: auto;
+        min-width: 100px;
+      }
+      
+      /* Apply specific column widths */
+      th.mat-header-cell.mat-column-medical_reason,
+      td.mat-cell.mat-column-medical_reason {
+        width: 20%;
+      }
+      
+      th.mat-header-cell.mat-column-medical_desc,
+      td.mat-cell.mat-column-medical_desc {
+        width: 30%;
+      }
+}
