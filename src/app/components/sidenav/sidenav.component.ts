@@ -19,7 +19,7 @@ export class SidenavComponent implements OnInit {
         {navName: "Employees", navLink: "/employees", icon: faUserGroup},
         {navName: "Appointments", navLink: "/appointment", icon: faCalendarCheck},
         {navName: "Patients", navLink: "/patients", icon: faHospitalUser},
-        {navName: "Activity Log", navLink: "/test", icon: faClipboardList},
+        {navName: "Activity Log", navLink: "/activity", icon: faClipboardList},
       ]
     },
 
@@ -36,7 +36,7 @@ export class SidenavComponent implements OnInit {
     //   category: "Patient",
     //   nav: [
     //     {navName: "Appointments", navLink: "/appointment", icon: faCalendarCheck},
-    //     {navName: "Medical Record", navLink: "/test", icon: faHospitalUser},
+    //     {navName: "Medical Record", navLink: "/record/:id", icon: faHospitalUser},
     //   ]
     // },
     

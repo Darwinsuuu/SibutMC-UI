@@ -54,6 +54,7 @@ import { PatientsComponent } from './pages/patients/patients.component';
 import { ManagePatientsComponent } from './components/patients/manage-patients/manage-patients.component';
 import { ModalApproveAppointmentComponent } from './components/modal/modal-approve-appointment/modal-approve-appointment.component';
 import { RecordComponent } from './pages/record/record.component';
+import { ActivityLogComponent } from './pages/activity-log/activity-log.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { RecordComponent } from './pages/record/record.component';
     ManagePatientsComponent,
     ModalApproveAppointmentComponent,
     RecordComponent,
+    ActivityLogComponent,
   ],
   imports: [
     BrowserModule,
