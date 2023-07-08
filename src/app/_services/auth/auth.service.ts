@@ -7,6 +7,6 @@ export class AuthService {
 
   constructor() { }
   
-  isAuth: boolean = true;
+  isAuth: boolean = false;
 
 }
