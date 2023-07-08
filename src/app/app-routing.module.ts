@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'appointment', component: AppointmentsComponent },
   { path: 'patients', component: PatientsComponent },
   { path: 'record/:id', component: RecordComponent },
-  { path: '',   redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '',   redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({
