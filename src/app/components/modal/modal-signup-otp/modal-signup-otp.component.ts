@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-modal-signup-otp',
@@ -8,12 +8,15 @@ import { MatDialog, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/d
 })
 export class ModalSignupOtpComponent {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(private dialogRef: MatDialogRef<ModalSignupOtpComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
 
 
   OTPCodes: string = "";
   showOTPCodeValidation: boolean = false;
   showSpinner: boolean = false;
+
+  
 
   checkOTPCodes() {
     console.log(this.OTPCodes.length)
@@ -24,8 +27,11 @@ export class ModalSignupOtpComponent {
       setTimeout(() => {                           
         this.showSpinner = false;
         
-        if (this.OTPCodes == "123456") {
+        console.log(this.OTPCodes)
+        console.log(this.data.otpCode)
+        if (this.OTPCodes == this.data.otpCode) {
           this.showOTPCodeValidation = false;
+          this.dialogRef.close(true);
         } else {
           this.showOTPCodeValidation = true;
         }

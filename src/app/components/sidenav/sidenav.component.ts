@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { faHome, faUserGroup, faCalendarCheck, faHospitalUser, faClipboardList, faRightFromBracket, faUserGear, faBars } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/_services/auth/auth.service';
 
@@ -10,7 +11,8 @@ import { AuthService } from 'src/app/_services/auth/auth.service';
 
 export class SidenavComponent implements OnInit {
 
-  constructor(public auth: AuthService) {}
+  constructor(public auth: AuthService,
+              private router: Router) {}
 
   access: number = this.auth.userType;
 

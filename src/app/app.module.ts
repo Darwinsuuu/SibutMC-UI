@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { HttpClientModule } from '@angular/common/http';
 
 // Components
 import { AppComponent } from './app.component';
@@ -21,6 +21,24 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HeaderComponent } from './components/header/header.component';
 import { EmployeesComponent } from './pages/employees/employees.component';
+import { ModalEditEmployeeComponent } from './components/modal/modal-edit-employee/modal-edit-employee.component';
+import { AppointmentsComponent } from './pages/appointments/appointments.component';
+import { PendingAppointmentsComponent } from './components/appointments/pending-appointments/pending-appointments.component';
+import { CompletedAppointmentsComponent } from './components/appointments/completed-appointments/completed-appointments.component';
+import { AllAppointmentsComponent } from './components/appointments/all-appointments/all-appointments.component';
+import { ApprovedAppointmentsComponent } from './components/appointments/approved-appointments/approved-appointments.component';
+import { DeclinedAppointmentsComponent } from './components/appointments/declined-appointments/declined-appointments.component';
+import { ModalDeclineAppointmentComponent } from './components/modal/modal-decline-appointment/modal-decline-appointment.component';
+import { PatientsComponent } from './pages/patients/patients.component';
+import { ManagePatientsComponent } from './components/patients/manage-patients/manage-patients.component';
+import { ModalApproveAppointmentComponent } from './components/modal/modal-approve-appointment/modal-approve-appointment.component';
+import { RecordComponent } from './pages/record/record.component';
+import { ActivityLogComponent } from './pages/activity-log/activity-log.component';
+import { AccountSettingsComponent } from './pages/account-settings/account-settings.component';
+import { PersonalInfoComponent } from './components/account/personal-info/personal-info.component';
+import { AdditionalInfoComponent } from './components/account/additional-info/additional-info.component';
+import { MedicalInfoComponent } from './components/account/medical-info/medical-info.component';
+import { LogoutComponent } from './components/account/logout/logout.component';
 
 
 // Angular Material
@@ -42,24 +60,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { ModalEditEmployeeComponent } from './components/modal/modal-edit-employee/modal-edit-employee.component';
-import { AppointmentsComponent } from './pages/appointments/appointments.component';
-import { PendingAppointmentsComponent } from './components/appointments/pending-appointments/pending-appointments.component';
-import { CompletedAppointmentsComponent } from './components/appointments/completed-appointments/completed-appointments.component';
-import { AllAppointmentsComponent } from './components/appointments/all-appointments/all-appointments.component';
-import { ApprovedAppointmentsComponent } from './components/appointments/approved-appointments/approved-appointments.component';
-import { DeclinedAppointmentsComponent } from './components/appointments/declined-appointments/declined-appointments.component';
-import { ModalDeclineAppointmentComponent } from './components/modal/modal-decline-appointment/modal-decline-appointment.component';
-import { PatientsComponent } from './pages/patients/patients.component';
-import { ManagePatientsComponent } from './components/patients/manage-patients/manage-patients.component';
-import { ModalApproveAppointmentComponent } from './components/modal/modal-approve-appointment/modal-approve-appointment.component';
-import { RecordComponent } from './pages/record/record.component';
-import { ActivityLogComponent } from './pages/activity-log/activity-log.component';
-import { AccountSettingsComponent } from './pages/account-settings/account-settings.component';
-import { PersonalInfoComponent } from './components/account/personal-info/personal-info.component';
-import { AdditionalInfoComponent } from './components/account/additional-info/additional-info.component';
-import { MedicalInfoComponent } from './components/account/medical-info/medical-info.component';
-import { LogoutComponent } from './components/account/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -119,7 +119,8 @@ import { LogoutComponent } from './components/account/logout/logout.component';
     MatTabsModule,
     MatPaginatorModule,
     MatTableModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

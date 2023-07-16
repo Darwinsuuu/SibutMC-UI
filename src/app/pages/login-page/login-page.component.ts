@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { Title } from "@angular/platform-browser";
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ModalTermsConditionsComponent } from 'src/app/components/modal/modal-terms-conditions/modal-terms-conditions.component';
@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/_services/auth/auth.service';
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss']
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent implements OnInit, AfterContentInit {
 
   constructor(private titleService: Title,
     private formBuilder: FormBuilder,
@@ -23,8 +23,12 @@ export class LoginPageComponent implements OnInit {
     this.titleService.setTitle("Sibut Medicare | Login");
   }
 
-
   ngOnInit(): void {
+    
+  }
+
+
+  ngAfterContentInit (): void {
     if (this.auth.isAuth) {
       this.route.navigate(['/dashboard']);
     }
@@ -77,9 +81,9 @@ export class LoginPageComponent implements OnInit {
       this.route.navigate(['/dashboard'])
     } else if (credentials.username == 'user' && credentials.password == 'user') {
       this.auth.isAuth = true;
-      this.auth.userType = 2;
+      this.auth.userType = 3;
       this.validCredentials = true;
-      this.route.navigate(['/record/1'])
+      this.route.navigate(['/appointment'])
     } else {
       this.validCredentials = false;
     }
