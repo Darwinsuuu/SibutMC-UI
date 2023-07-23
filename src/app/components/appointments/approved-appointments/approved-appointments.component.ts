@@ -1,44 +1,61 @@
-import {AfterViewInit, Component, ViewChild, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ViewChild, OnInit, Input, ChangeDetectorRef, SimpleChanges, OnChanges} from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { appointmentList } from '../dummyAppointments';
-import { appointments } from 'src/app/_models/AppointmentModel';
+import { GetAllAppointmentLists } from 'src/app/_models/AppointmentModel';
 import { faCheck, faXmark, faBell } from '@fortawesome/free-solid-svg-icons';
 import { ModalDeclineAppointmentComponent } from '../../modal/modal-decline-appointment/modal-decline-appointment.component';
+import { AuthService } from 'src/app/_services/auth/auth.service';
 
 @Component({
   selector: 'app-approved-appointments',
   templateUrl: './approved-appointments.component.html',
   styleUrls: ['./approved-appointments.component.scss']
 })
-export class ApprovedAppointmentsComponent implements AfterViewInit, OnInit {
+export class ApprovedAppointmentsComponent implements AfterViewInit, OnInit, OnChanges {
   faCheck = faCheck;
   faXmark = faXmark;
   faBell = faBell;
 
 
-  displayedColumns: string[] = ['patientFullname', 'appointed_time', 'appointed_date', 'medical_reason', 'statusName', 'date_created', 'action'];
-  dataSource: MatTableDataSource<appointments>;
+  displayedColumns: string[] = this.auth.userType === 3 ? ['patientFullname', 'appointed_time', 'appointed_date', 'medical_reason', 'statusName', 'date_created'] : ['patientFullname', 'appointed_time', 'appointed_date', 'medical_reason', 'statusName', 'date_created', 'action'];
+  dataSource!: MatTableDataSource<GetAllAppointmentLists>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  @Input() appointmentList: GetAllAppointmentLists[] = [];
+
   constructor(private dialog: MatDialog,  
-              private snackBar: MatSnackBar) {
-    this.dataSource = new MatTableDataSource(appointmentList.filter(x => x.status === 2));
+              private snackBar: MatSnackBar,
+              private auth: AuthService) {
+                setTimeout(() => {
+                  this.dataSource = new MatTableDataSource(this.appointmentList.filter(x => x.status === 2));
+                }, 1000);
   }
 
+
   ngOnInit(): void {
+
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    if (this.dataSource && this.appointmentList && this.appointmentList.length > 0) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['appointmentList'] && !changes['appointmentList'].firstChange) {
+      // Update dataSource when appointmentList changes
+      this.dataSource.data = this.appointmentList.filter(x => x.status === 2);
+    }
+  }
+  
+  
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -49,7 +66,6 @@ export class ApprovedAppointmentsComponent implements AfterViewInit, OnInit {
   }
 
 
-  
   approveAppointment(id: number) {
 
     // api call here
@@ -65,7 +81,7 @@ export class ApprovedAppointmentsComponent implements AfterViewInit, OnInit {
 
   declineAppointment(id: number) {
 
-    let name = appointmentList.find(x => x.id === id)?.patientFullname;
+    let name = this.appointmentList.find(x => x.appointment_id === id)?.patient_fullname;
 
     this.dialog.open(ModalDeclineAppointmentComponent, {
       data: { patientName: name },

@@ -45,8 +45,6 @@ export class ModalForgotPasswordComponent {
   sendOTPCode() {
     if(this.credential.valid) {
       this.validOTPCode = Math.floor(100000 + Math.random() * 900000).toString();
-      alert('This is temporary! OTP: ' + this.validOTPCode);
-      
       this.startCountdown();
 
       // api call here

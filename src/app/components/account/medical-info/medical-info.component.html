@@ -19,18 +19,27 @@
                 <div class="py-3">
                     <div class="grid grid-cols-1 gap-2">
                         <mat-form-field appearance="outline" class="!w-[100%]">
-                            <mat-label>Height</mat-label>
-                            <input matInput placeholder="" formControlName="height">
+                            <mat-label>Height (cm)</mat-label>
+                            <input matInput placeholder="In centimeters(cm)" type="number" formControlName="height">
                         </mat-form-field>
 
                         <mat-form-field appearance="outline" class="!w-[100%]">
-                            <mat-label>Weight</mat-label>
-                            <input matInput placeholder=""formControlName="weight">
+                            <mat-label>Weight (kg)</mat-label>
+                            <input matInput placeholder="In kilograms(kg)" type="number" formControlName="weight">
                         </mat-form-field>
 
                         <mat-form-field appearance="outline" class="!w-[100%]">
                             <mat-label>Blood Type</mat-label>
-                            <input autocomplete="off" matInput placeholder="" formControlName="blood_type">
+                            <mat-select formControlName="blood_type">
+                                <mat-option value="O+">O+</mat-option>
+                                <mat-option value="O-">O-</mat-option>
+                                <mat-option value="A+">A+</mat-option>
+                                <mat-option value="A-">A-</mat-option>
+                                <mat-option value="B+">B+</mat-option>
+                                <mat-option value="B-">B-</mat-option>
+                                <mat-option value="AB+">AB+</mat-option>
+                                <mat-option value="AB-">AB-</mat-option>
+                            </mat-select>
                         </mat-form-field>
 
                         

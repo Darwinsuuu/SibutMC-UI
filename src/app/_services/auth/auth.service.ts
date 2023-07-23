@@ -15,7 +15,7 @@ export class AuthService {
 
   // isAuth: boolean = true;
   // userType: number = 3;
-  // userId: string = 'a07bcf8b-21a4-4373-96a7-33c03a31dbc0';
+  // userId: string = 'f2592f56-6311-4688-8d08-aadd5b096945';
 
   constructor(private http: HttpClient) { }
 

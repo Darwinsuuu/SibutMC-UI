@@ -1,29 +1,32 @@
-<div class="relative top-10 py-10 px-5 w-[100vw] lg:pl-[280px]">
+<app-loading-screen *ngIf="isLoading"></app-loading-screen>
+
+1<div class="relative top-10 py-10 px-5 w-[100vw] lg:pl-[280px]">
     <app-header [title]="pageTitle"></app-header>
 
+    <button mat-raised-button color="primary" class="!mt-6 !px-8 !py-6 !w-full md:!max-w-[250px]" (click)="toggleNewAppointmentForm()">Create new appointment</button>
+
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center" animationDuration="500ms" class="mt-5"
-        selectedIndex="2">
+        selectedIndex="2" (selectedTabChange)="onTabChange($event)">
 
         <mat-tab label="All" class="!font-semibold">
-            <app-all-appointments></app-all-appointments>
+            <app-all-appointments [appointmentList]="allAppointmentList"></app-all-appointments>
         </mat-tab>
         
         <mat-tab label="Completed" class="!font-semibold">
-            <app-completed-appointments></app-completed-appointments>
+            <app-completed-appointments [appointmentList]="allAppointmentList"></app-completed-appointments>
         </mat-tab>
         
         <mat-tab label="Pending" class="!font-semibold">
-            <app-pending-appointments></app-pending-appointments>
+            <app-pending-appointments [appointmentList]="allAppointmentList"></app-pending-appointments>
         </mat-tab>
 
         <mat-tab label="Approved" class="!font-semibold">
-            <app-approved-appointments></app-approved-appointments>
+            <app-approved-appointments [appointmentList]="allAppointmentList"></app-approved-appointments>
         </mat-tab>
 
         <mat-tab label="Declined" class="!font-semibold">
-            <app-declined-appointments></app-declined-appointments>
+            <app-declined-appointments [appointmentList]="allAppointmentList"></app-declined-appointments>
         </mat-tab>
-
 
     </mat-tab-group>
 </div>

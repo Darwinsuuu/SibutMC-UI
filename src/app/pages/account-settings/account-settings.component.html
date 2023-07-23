@@ -19,7 +19,8 @@
         </mat-tab>
         
         <mat-tab label="Medical Info" class="!font-semibold">
-            <app-medical-info></app-medical-info>
+            <app-medical-info [fetchedMedicalInfo]="accountInformation.medicalInfo">
+            </app-medical-info>
         </mat-tab>
 
 

@@ -1,0 +1,30 @@
+<div class="w-[100%] max-w-[620px] shadow-lg p-5">
+    <h1 class="font-semibold">New Appointment</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque inventore perspiciatis eveniet totam, accusantium quaerat?</p>
+
+    <form [formGroup]="appointmentData" (ngSubmit)="submitNewAppointment(appointmentData.value)">
+
+        <mat-form-field appearance="outline" class="!w-[100%]">
+            <mat-label>Appointment Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="appointment_date"
+                placeholder="MM/DD/YYYY">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="!w-[100%]">
+            <mat-label>Medical Reason</mat-label>
+            <input type="text" matInput formControlName="medical_reason" maxlength="25">
+            <span matSuffix class="pr-4 text-slate-500">{{ getMedicalReasonLength() }}</span>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="!w-[100%]">
+            <mat-label>Medical Description</mat-label>
+            <textarea matInput rows="5" placeholder="Please describe what you are feeling right now ..."
+                                        formControlName="medical_description"></textarea>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" class="!w-full !py-7">Submit appointment</button>
+    </form>
+
+</div>

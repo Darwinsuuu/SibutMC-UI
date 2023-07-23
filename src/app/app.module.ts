@@ -62,6 +62,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.component';
 import { LoadingScreenComponent } from './components/loading-screen/loading-screen.component';
+import { ModalNewAppointmentComponent } from './components/modal/modal-new-appointment/modal-new-appointment.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { LoadingScreenComponent } from './components/loading-screen/loading-scre
     LogoutComponent,
     PagenotfoundComponent,
     LoadingScreenComponent,
+    ModalNewAppointmentComponent,
   ],
   imports: [
     BrowserModule,

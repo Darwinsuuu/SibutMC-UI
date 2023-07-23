@@ -147,4 +147,25 @@ export class UserServiceService {
 
   }
 
+  async updateMedicalInfo(medicalInfo: any) {
+
+    try {
+
+      const url = environment.apiUrl + 'api/patient/updateMedicalInfo';
+      const response = await this.http.put<any>(url, medicalInfo).toPromise();
+      return response;
+
+    } catch (error: any) {
+      if (error.status === 500) {
+        console.error('An internal server error occurred. Please try again later. ');
+        console.error(error)
+      } else {
+        console.error('An error occurred. Please try again. ');
+        console.error(error)
+      }
+      throw error.error;
+    }
+
+  }
+
 }
