@@ -108,8 +108,6 @@ export class SignupPageComponent {
 
     try {
       const response = await this.userService.createNewPatient(allInfo);
-      // Handle the response
-      console.log(response);
 
       Swal.fire({
         title: 'Success',

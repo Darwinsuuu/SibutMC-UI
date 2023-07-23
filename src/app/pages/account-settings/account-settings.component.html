@@ -1,14 +1,21 @@
+<app-loading-screen *ngIf="isLoading"></app-loading-screen>
+
 <div class="relative top-10 py-10 px-5 w-[100vw] lg:pl-[280px]">
     <app-header [title]="pageTitle"></app-header>
 
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center" animationDuration="500ms" class="mt-5">
 
         <mat-tab label="Personal Info" class="!font-semibold">
-            <app-personal-info></app-personal-info>
+            <app-personal-info [fetchedPersonalInfo]="accountInformation.personalInfo"
+                               [fetchedAccountInfo]="accountInformation.accountInfo">
+            </app-personal-info>
         </mat-tab>
         
         <mat-tab label="Additional Info" class="!font-semibold">
-            <app-additional-info></app-additional-info>
+            <app-additional-info [fetchedContactInfo]="accountInformation.contactInfo"
+                                 [fetchedEmergencyContact]="accountInformation.emergencyContactInfo">
+
+            </app-additional-info>
         </mat-tab>
         
         <mat-tab label="Medical Info" class="!font-semibold">

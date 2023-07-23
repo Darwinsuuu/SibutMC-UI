@@ -10,10 +10,17 @@ import { RecordComponent } from './pages/record/record.component';
 import { ActivityLogComponent } from './pages/activity-log/activity-log.component';
 import { AccountSettingsComponent } from './pages/account-settings/account-settings.component';
 import { LogoutComponent } from './components/account/logout/logout.component';
+import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.component';
 
 const routes: Routes = [
+
+  // Accounts
   { path: 'login', component: LoginPageComponent },
+  { path: 'login/staff', component: LoginPageComponent },
+  { path: 'login/admin', component: LoginPageComponent },
   { path: 'create-account', component: SignupPageComponent },
+
+  // Main Pages
   { path: 'dashboard', component: DashboardComponent },
   { path: 'employees', component: EmployeesComponent },
   { path: 'appointment', component: AppointmentsComponent },
@@ -21,8 +28,12 @@ const routes: Routes = [
   { path: 'record/:id', component: RecordComponent },
   { path: 'activity', component: ActivityLogComponent },
   { path: 'account', component: AccountSettingsComponent },
+
+  // Others
   { path: 'logout', component: LogoutComponent },
   { path: '',   redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', component: PagenotfoundComponent },
+
 ];
 
 @NgModule({

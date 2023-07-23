@@ -43,7 +43,7 @@ export class SidenavComponent implements OnInit {
       module: 3,
       nav: [
         {navName: "Appointments", navLink: "/appointment", icon: faCalendarCheck, accessModule: 3},
-        {navName: "My Medical Record", navLink: "/record/1", icon: faHospitalUser, accessModule: 3},
+        {navName: "My Medical Record", navLink: "/record/"+this.auth.userId, icon: faHospitalUser, accessModule: 3},
       ]
     },
     

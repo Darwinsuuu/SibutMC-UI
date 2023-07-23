@@ -19,16 +19,12 @@ export class ModalSignupOtpComponent {
   
 
   checkOTPCodes() {
-    console.log(this.OTPCodes.length)
     if (this.OTPCodes.length == 6) {
 
       this.showSpinner = true;
 
       setTimeout(() => {                           
         this.showSpinner = false;
-        
-        console.log(this.OTPCodes)
-        console.log(this.data.otpCode)
         if (this.OTPCodes == this.data.otpCode) {
           this.showOTPCodeValidation = false;
           this.dialogRef.close(true);

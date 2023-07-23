@@ -60,6 +60,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.component';
+import { LoadingScreenComponent } from './components/loading-screen/loading-screen.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +96,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     AdditionalInfoComponent,
     MedicalInfoComponent,
     LogoutComponent,
+    PagenotfoundComponent,
+    LoadingScreenComponent,
   ],
   imports: [
     BrowserModule,

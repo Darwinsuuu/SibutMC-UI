@@ -22,7 +22,8 @@
               "html2canvas",
               "rgbcolor",
               "raf",
-              "core-js"
+              "core-js",
+              "sweetalert2"
             ],
             "outputPath": "dist/sibut-mc-ui",
             "index": "src/index.html",

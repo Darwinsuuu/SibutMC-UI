@@ -4,7 +4,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { ModalTermsConditionsComponent } from 'src/app/components/modal/modal-terms-conditions/modal-terms-conditions.component';
 import { ModalForgotPasswordComponent } from 'src/app/components/modal/modal-forgot-password/modal-forgot-password.component';
 import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UserLogin } from 'src/app/_models/UserModel';
 import { AuthService } from 'src/app/_services/auth/auth.service';
 
@@ -19,16 +19,17 @@ export class LoginPageComponent implements OnInit, AfterContentInit {
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
     private route: Router,
-    private auth: AuthService) {
+    private auth: AuthService,
+    private activeRoute: ActivatedRoute) {
     this.titleService.setTitle("Sibut Medicare | Login");
   }
 
   ngOnInit(): void {
-    
+
   }
 
 
-  ngAfterContentInit (): void {
+  ngAfterContentInit(): void {
     if (this.auth.isAuth) {
       this.route.navigate(['/dashboard']);
     }
@@ -65,29 +66,59 @@ export class LoginPageComponent implements OnInit, AfterContentInit {
     });
   }
 
-  submitLoginCredentials(credentials: UserLogin) {
+  async submitLoginCredentials(credentials: UserLogin) {
 
     // api call here
+    try {
 
-    if (credentials.username == 'admin' && credentials.password == 'admin') {
-      this.auth.isAuth = true;
-      this.auth.userType = 1;
-      this.validCredentials = true;
-      this.route.navigate(['/dashboard'])
-    } else if (credentials.username == 'staff' && credentials.password == 'staff') {
-      this.auth.isAuth = true;
-      this.auth.userType = 2;
-      this.validCredentials = true;
-      this.route.navigate(['/dashboard'])
-    } else if (credentials.username == 'user' && credentials.password == 'user') {
-      this.auth.isAuth = true;
-      this.auth.userType = 3;
-      this.validCredentials = true;
-      this.route.navigate(['/appointment'])
-    } else {
-      this.validCredentials = false;
+      const authPath = this.loginURL;
+      const result = await this.auth.login(credentials, authPath);
+
+      if (result.success === true) {
+        this.validCredentials = true;
+        this.route.navigate(['/appointment'])
+      } else {
+        this.validCredentials = false;
+      }
+
+    } catch (error) {
+
+      console.log(error)
+
     }
 
+
+    // if (credentials.username == 'admin' && credentials.password == 'admin') {
+    //   this.auth.isAuth = true;
+    //   this.auth.userType = 1;
+    //   this.validCredentials = true;
+    //   this.route.navigate(['/dashboard'])
+    // } else if (credentials.username == 'staff' && credentials.password == 'staff') {
+    //   this.auth.isAuth = true;
+    //   this.auth.userType = 2;
+    //   this.validCredentials = true;
+    //   this.route.navigate(['/dashboard'])
+    // } else if (credentials.username == 'user' && credentials.password == 'user') {
+    //   this.auth.isAuth = true;
+    //   this.auth.userType = 3;
+    //   this.validCredentials = true;
+    //   this.route.navigate(['/appointment'])
+    // } else {
+    //   this.validCredentials = false;
+    // }
+
+  }
+
+
+  get loginURL() {
+
+    const url = window.location.href;
+    const parts = url.split("/");
+    const loginURL = parts[parts.length - 1];
+
+    return loginURL === 'admin' ? 'adminAuthentication' :
+      loginURL === 'staff' ? 'staffAuthentication' :
+        'patientAuthentication'
   }
 
 }
