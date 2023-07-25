@@ -39,7 +39,7 @@ export class RecordComponent {
     private snackBar: MatSnackBar,
     private auth: AuthService,
     private userService: UserServiceService) {
-    this.titleService.setTitle("Sibut Medicare | Employees");
+    this.titleService.setTitle("Sibut Medicare | Medical Record");
     this.dataSource = new MatTableDataSource(dummy);
   }
   ngOnInit(): void {
