@@ -56,7 +56,6 @@ export class PersonalInfoComponent implements OnInit {
       // account information
       this.accountInfo.get('user_id')?.setValue(this.fetchedPersonalInfo.user_id);
       this.accountInfo.get('username')?.setValue(this.fetchedAccountInfo.username);
-      this.accountInfo.get('password')?.setValue(this.fetchedAccountInfo.password);
 
     }, 1000);
   }

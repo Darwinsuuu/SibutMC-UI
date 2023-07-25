@@ -63,6 +63,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.component';
 import { LoadingScreenComponent } from './components/loading-screen/loading-screen.component';
 import { ModalNewAppointmentComponent } from './components/modal/modal-new-appointment/modal-new-appointment.component';
+import { environment } from 'src/environments/environment';
+import { authGuard } from './_services/auth/auth.guard';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -128,7 +131,8 @@ import { ModalNewAppointmentComponent } from './components/modal/modal-new-appoi
     MatSnackBarModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [authGuard],
+  exports: [RouterModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

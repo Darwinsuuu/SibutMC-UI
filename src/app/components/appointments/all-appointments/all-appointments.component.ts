@@ -48,7 +48,9 @@ export class AllAppointmentsComponent implements AfterViewInit, OnInit, OnChange
   ngOnChanges(changes: SimpleChanges) {
     if (changes['appointmentList'] && !changes['appointmentList'].firstChange) {
       // Update dataSource when appointmentList changes
-      this.dataSource.data = this.appointmentList;
+      setTimeout(() => {
+        this.dataSource.data = this.appointmentList;
+      }, 1000);
     }
   }
 

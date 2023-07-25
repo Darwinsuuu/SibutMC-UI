@@ -22,7 +22,7 @@ export class PendingAppointmentsComponent implements AfterViewInit, OnInit, OnCh
   faBell = faBell;
 
 
-  displayedColumns: string[] = this.auth.userType === 3 ? ['patientFullname', 'appointed_time', 'appointed_date', 'medical_reason', 'statusName', 'date_created'] : ['patientFullname', 'appointed_time', 'appointed_date', 'medical_reason', 'statusName', 'date_created', 'action'];
+  displayedColumns: string[] = localStorage.getItem('User_Type') === '3' ? ['patientFullname', 'appointed_time', 'appointed_date', 'medical_reason', 'statusName', 'date_created'] : ['patientFullname', 'appointed_time', 'appointed_date', 'medical_reason', 'statusName', 'date_created', 'action'];
   dataSource!: MatTableDataSource<GetAllAppointmentLists>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -53,7 +53,9 @@ export class PendingAppointmentsComponent implements AfterViewInit, OnInit, OnCh
   ngOnChanges(changes: SimpleChanges) {
     if (changes['appointmentList'] && !changes['appointmentList'].firstChange) {
       // Update dataSource when appointmentList changes
-      this.dataSource.data = this.appointmentList.filter(x => x.status === 1);
+      setTimeout(() => {
+        this.dataSource.data = this.appointmentList.filter(x => x.status === 1);
+      }, 1000);
     }
   }
 

@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { faCheck, faXmark, faBell } from '@fortawesome/free-solid-svg-icons';
 import { dummy } from './dummy';
 import { ActivityLog } from 'src/app/_models/ActivityLog';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-activity-log',
@@ -28,9 +29,11 @@ export class ActivityLogComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private dialog: MatDialog,  
+  constructor(private titleService: Title, private dialog: MatDialog,  
               private snackBar: MatSnackBar) {
     this.dataSource = new MatTableDataSource(dummy);
+    
+    this.titleService.setTitle("Sibut Medicare | Activity Log");
   }
 
   ngOnInit(): void {

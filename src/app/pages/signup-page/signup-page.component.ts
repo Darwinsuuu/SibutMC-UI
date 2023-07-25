@@ -6,6 +6,7 @@ import { SmsServiceService } from 'src/app/_services/semaphore/sms-service.servi
 import { UserServiceService } from 'src/app/_services/user/user-service.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-signup-page',
@@ -14,11 +15,14 @@ import Swal from 'sweetalert2';
 })
 export class SignupPageComponent {
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private titleService: Title, 
+    private formBuilder: FormBuilder,
     private dialog: MatDialog,
     private router: Router,
     private smsService: SmsServiceService,
-    private userService: UserServiceService) { }
+    private userService: UserServiceService) { 
+      this.titleService.setTitle("Sibut Medicare | Create Account");
+    }
 
   personalInfo: FormGroup = this.formBuilder.group({
     firstname: ["", [Validators.required, Validators.pattern(/^[A-Za-z -]+$/)]],

@@ -3,7 +3,8 @@
     <fa-icon [icon]="faBars" (click)="navToggle()"></fa-icon>
 </div>
 
-<div class="block lg:hidden fixed !w-full !h-full top-0 left-0 bg-[#000000ab] z-20" (click)="navToggle()" *ngIf="isNavOpen"></div>
+<div class="block lg:hidden fixed !w-full !h-full top-0 left-0 bg-[#000000ab] z-20" (click)="navToggle()"
+    *ngIf="isNavOpen"></div>
 
 <div class="hidden lg:block fixed w-[260px] p-5 bg-white h-full z-30" [ngClass]="{'!block': isNavOpen}">
     <!-- bg-[#064f32]  -->
@@ -15,11 +16,13 @@
             <ng-container *ngFor="let cat of navList">
 
 
-                <p class="font-bold text-slate-500 !mb-3 !mt-8" *ngIf="cat.module === access || cat.module === 0">{{ cat.category }}</p>
+                <p class="font-bold text-slate-500 !mb-3 !mt-8" *ngIf="cat.module == access || cat.module == 0">{{
+                    cat.category }}</p>
 
                 <li class="mb-1" *ngFor="let nav of cat.nav">
-                    <ng-container *ngIf="nav.accessModule === access || nav.accessModule === 0">
-                        <a [routerLink]="nav.navLink" routerLinkActive="bg-[#3f51b5] text-white transition-all" class="block px-5 py-4 w-full rounded-lg hover:bg-[#3f51b5] hover:text-white hover:transition-all">
+                    <ng-container *ngIf="nav.accessModule == access || nav.accessModule == 0">
+                        <a [routerLink]="nav.navLink" routerLinkActive="bg-[#3f51b5] text-white transition-all"
+                            class="block px-5 py-4 w-full rounded-lg hover:bg-[#3f51b5] hover:text-white hover:transition-all">
                             <div class="flex flex-row gap-3">
                                 <fa-icon [icon]="nav.icon"></fa-icon>
                                 <span class="font-semibold">{{ nav.navName }}</span>
@@ -28,8 +31,17 @@
                     </ng-container>
                 </li>
 
-
             </ng-container>
+
+            
+            <li class="mb-1">
+                <a class="block px-5 py-4 w-full rounded-lg hover:bg-[#b54d3f] hover:text-white hover:transition-all cursor-pointer" (click)="logOutBtn()">
+                    <div class="flex flex-row gap-3">
+                        <fa-icon [icon]="faRightFromBracket"></fa-icon>
+                        <span class="font-semibold">Logout</span>
+                    </div>
+                </a>
+            </li>
 
 
 

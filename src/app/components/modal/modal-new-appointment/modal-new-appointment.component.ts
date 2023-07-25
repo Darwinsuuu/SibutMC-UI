@@ -19,7 +19,7 @@ export class ModalNewAppointmentComponent {
   }
 
   appointmentData: FormGroup = this.formBuilder.group({
-    user_id: [this.auth.userId, Validators.required],
+    user_id: [localStorage.getItem('User_ID'), Validators.required],
     appointment_date: ["", [Validators.required, DateValidator.cannotBePastDate]],
     medical_reason: ["", [Validators.required]],
     medical_description: ["", [Validators.required]],

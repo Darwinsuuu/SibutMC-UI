@@ -13,6 +13,7 @@ import { MedicalRecordData } from 'src/app/_models/MedicalRecordModel';
 import { AuthService } from 'src/app/_services/auth/auth.service';
 import { UserServiceService } from 'src/app/_services/user/user-service.service';
 import Swal from 'sweetalert2';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-record',
@@ -33,13 +34,14 @@ export class RecordComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private dialog: MatDialog,
+  constructor(private titleService: Title, 
+    private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private auth: AuthService,
     private userService: UserServiceService) {
+    this.titleService.setTitle("Sibut Medicare | Employees");
     this.dataSource = new MatTableDataSource(dummy);
   }
-
   ngOnInit(): void {
     this.getPatientInfo()
   }
@@ -63,8 +65,7 @@ export class RecordComponent {
 
     try {
       
-      const userId = this.getUserId;
-      const response = await this.userService.userInformation(userId);
+      const response = await this.userService.userInformation();
 
       if (!response.success) {
         Swal.fire({
@@ -86,7 +87,6 @@ export class RecordComponent {
 
       setTimeout(() => {
         this.isLoading = false;
-        console.log(this.patientInfo)
       }, 1500);
 
       return true;
@@ -108,19 +108,6 @@ export class RecordComponent {
     }
 
   }
-
-
-  get getUserId() {
-
-    const url = window.location.href;
-    const parts = url.split("/");
-    const userId = parts[parts.length - 1];
-
-    return userId;
-
-  }
-
-
 
 
   onPrint(div: any) {

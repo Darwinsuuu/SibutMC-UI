@@ -25,14 +25,19 @@ export class LoginPageComponent implements OnInit, AfterContentInit {
   }
 
   ngOnInit(): void {
+    const userType = localStorage.getItem('User_Type');
+    if(userType) {
 
+      if(userType === '3') {
+        this.route.navigate(["/appointment"]);
+      }
+
+    }
   }
 
 
   ngAfterContentInit(): void {
-    if (this.auth.isAuth) {
-      this.route.navigate(['/dashboard']);
-    }
+    
   }
 
 
@@ -82,30 +87,8 @@ export class LoginPageComponent implements OnInit, AfterContentInit {
       }
 
     } catch (error) {
-
-      console.log(error)
-
+      this.validCredentials = false;
     }
-
-
-    // if (credentials.username == 'admin' && credentials.password == 'admin') {
-    //   this.auth.isAuth = true;
-    //   this.auth.userType = 1;
-    //   this.validCredentials = true;
-    //   this.route.navigate(['/dashboard'])
-    // } else if (credentials.username == 'staff' && credentials.password == 'staff') {
-    //   this.auth.isAuth = true;
-    //   this.auth.userType = 2;
-    //   this.validCredentials = true;
-    //   this.route.navigate(['/dashboard'])
-    // } else if (credentials.username == 'user' && credentials.password == 'user') {
-    //   this.auth.isAuth = true;
-    //   this.auth.userType = 3;
-    //   this.validCredentials = true;
-    //   this.route.navigate(['/appointment'])
-    // } else {
-    //   this.validCredentials = false;
-    // }
 
   }
 

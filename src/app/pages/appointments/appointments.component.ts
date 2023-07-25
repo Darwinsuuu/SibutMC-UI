@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Title } from '@angular/platform-browser';
 import { GetAllAppointmentLists } from 'src/app/_models/AppointmentModel';
 import { AppointmentService } from 'src/app/_services/appointment/appointment.service';
 import { AuthService } from 'src/app/_services/auth/auth.service';
@@ -21,10 +22,11 @@ export class AppointmentsComponent implements OnInit {
 
   isLoading: boolean = true;
 
-  constructor(private auth: AuthService,
+  constructor(private titleService: Title,
+              private auth: AuthService,
               private dialog: MatDialog,
               private appointmentService: AppointmentService) {
-
+        this.titleService.setTitle("Sibut Medicare | Appointments");
   }
 
   ngOnInit(): void {
@@ -34,7 +36,7 @@ export class AppointmentsComponent implements OnInit {
 
   toggleNewAppointmentForm() {
     this.dialog.open(ModalNewAppointmentComponent, {
-      data: {userId: this.auth.userId},
+      data: {userId: localStorage.getItem('User_ID')},
       width: 'fit-content',
       enterAnimationDuration: 500,
       exitAnimationDuration: 500,
@@ -42,20 +44,21 @@ export class AppointmentsComponent implements OnInit {
 
       if(res) {
         // api call here
+        this.isLoading = true;
         const result = await this.appointmentService.createNewAppointment(res);
-
-        if (result.success) {
-          Swal.fire({
-            title: 'Success',
-            text: result.message,
-            icon: 'success',
-            confirmButtonText: 'OK'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.isLoading = true;
-              this.getAllAppointmentLists();
-            }
-          });
+        if(result) {
+          if (result.success) {
+            Swal.fire({
+              title: 'Success',
+              text: result.message,
+              icon: 'success',
+              confirmButtonText: 'OK'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.getAllAppointmentLists();
+              }
+            });
+          }
         }
       }
 

@@ -1,6 +1,6 @@
-<div [ngClass]="{'flex flex-row w-full h-full': auth.isAuth}">
+<div [ngClass]="{'flex flex-row w-full h-full': authService.isLoggedIn()}">
 
-    <ng-container *ngIf="auth.isAuth">
+    <ng-container *ngIf="authService.isLoggedIn()">
         <app-sidenav></app-sidenav>
     </ng-container>
     

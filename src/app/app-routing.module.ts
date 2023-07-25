@@ -11,6 +11,7 @@ import { ActivityLogComponent } from './pages/activity-log/activity-log.componen
 import { AccountSettingsComponent } from './pages/account-settings/account-settings.component';
 import { LogoutComponent } from './components/account/logout/logout.component';
 import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.component';
+import { authGuard } from './_services/auth/auth.guard';
 
 const routes: Routes = [
 
@@ -21,16 +22,16 @@ const routes: Routes = [
   { path: 'create-account', component: SignupPageComponent },
 
   // Main Pages
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'employees', component: EmployeesComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
+  { path: 'employees', component: EmployeesComponent, canActivate: [authGuard] },
   { path: 'appointment', component: AppointmentsComponent },
-  { path: 'patients', component: PatientsComponent },
-  { path: 'record/:id', component: RecordComponent },
-  { path: 'activity', component: ActivityLogComponent },
-  { path: 'account', component: AccountSettingsComponent },
+  { path: 'patients', component: PatientsComponent, canActivate: [authGuard] },
+  { path: 'record/:id', component: RecordComponent, canActivate: [authGuard] },
+  { path: 'activity', component: ActivityLogComponent, canActivate: [authGuard] },
+  { path: 'account', component: AccountSettingsComponent, canActivate: [authGuard] },
 
   // Others
-  { path: 'logout', component: LogoutComponent },
+  { path: 'logout', component: LogoutComponent, canActivate: [authGuard] },
   { path: '',   redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: PagenotfoundComponent },
 

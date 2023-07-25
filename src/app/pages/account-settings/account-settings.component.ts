@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth/auth.service';
 import { UserServiceService } from 'src/app/_services/user/user-service.service';
@@ -17,10 +18,12 @@ export class AccountSettingsComponent implements OnInit {
   isLoading: boolean = true;
 
 
-  constructor(private auth: AuthService,
-    private userService: UserServiceService,
-    private router: Router) {
+  constructor(private titleService: Title, 
+              private auth: AuthService,
+              private userService: UserServiceService,
+              private router: Router) {
 
+      this.titleService.setTitle("Sibut Medicare | Account Settings");
   }
 
 
@@ -34,9 +37,8 @@ export class AccountSettingsComponent implements OnInit {
   async getPatientInfo() {
 
     try {
-      const userId = this.auth.userId;
-      const response = await this.userService.userInformation(userId);
-
+      const response = await this.userService.userInformation();
+      console.log(response)
       if (!response.success) {
         Swal.fire({
           title: "Something went wrong!",

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,8 +10,8 @@ export class DashboardComponent {
 
   pageTitle: string = "Dashboard";
 
-  constructor() {
-    
+  constructor(private titleService: Title) {
+    this.titleService.setTitle("Sibut Medicare | Dashboard");
   }
 
 }

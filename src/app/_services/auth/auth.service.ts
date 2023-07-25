@@ -1,5 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { EmptyExpr } from '@angular/compiler';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserLogin } from 'src/app/_models/UserModel';
 import { environment } from 'src/environments/environment';
 
@@ -7,17 +9,36 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
+  static getAuthToken() {
+      throw new Error("Method not implemented.");
+  }
 
-  isAuth: boolean = false;
-  userType: number = 0;
-  userId: string = '';
+
+  isLoggedInStatus: boolean = false;
+
+  constructor(private http: HttpClient,
+              private router: Router) {
+   }
 
 
-  // isAuth: boolean = true;
-  // userType: number = 3;
-  // userId: string = 'f2592f56-6311-4688-8d08-aadd5b096945';
+  private storeAuthToken(token: string, userId : string, userType: string): void {
+    localStorage.setItem('JWT_TOKEN', token);
+    localStorage.setItem('User_ID', userId);
+    localStorage.setItem('User_Type', userType);
+  }
 
-  constructor(private http: HttpClient) { }
+  private getAuthToken(): string | null {
+    return localStorage.getItem('JWT_TOKEN');
+  }
+
+  private clearAuthToken(): void {
+    this.isLoggedInStatus = false;
+    localStorage.removeItem('JWT_TOKEN');
+    localStorage.removeItem('User_ID');
+    localStorage.removeItem('User_Type');
+  }
+
+
 
   async login(credentials: UserLogin, path: string): Promise<any> {
 
@@ -27,21 +48,34 @@ export class AuthService {
 
       const response = await this.http.post<any>(url, credentials).toPromise();
       if (response.success === true) {
-        this.userId = response.userId;
-        this.isAuth = true;
-        this.userType = path === 'adminAuthentication' ? 1 :
-          path === 'staffAuthentication' ? 2 : 3;
-      }
+        this.isLoggedInStatus = true;
 
+        const authToken = response.token;
+        const userId = response.userId;
+        const userType = response.userType;
+
+        this.storeAuthToken(authToken, userId, userType);
+
+      }
       return response;
 
     } catch (error: any) {
-
       throw error.error;
     }
 
   }
 
+
+  // Simulate a logout action
+  logout(): void {
+    this.clearAuthToken();
+    this.router.navigate(["/login"]);
+  }
+
+  // Check if the user is logged in
+  isLoggedIn(): boolean {
+    return !!this.getAuthToken();
+  }
 
 
 }

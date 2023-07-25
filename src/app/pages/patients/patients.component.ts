@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-patients',
@@ -9,6 +10,8 @@ export class PatientsComponent {
 
   pageTitle: string = "Patients";
 
-  
+  constructor(private titleService: Title) {
+    this.titleService.setTitle("Sibut Medicare | Patients");
+  }
 
 }

@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NewAppointment } from 'src/app/_models/AppointmentModel';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
+import { httpHeader } from '../header';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +12,21 @@ import { AuthService } from '../auth/auth.service';
 export class AppointmentService {
 
   constructor(private http: HttpClient,
-              private auth: AuthService) { }
+    private auth: AuthService) {
+  }
+
+
 
   async createNewAppointment(appointmentInfo: NewAppointment): Promise<any> {
 
     try {
+
       const url = environment.apiUrl + 'api/appointment/createAppointment';
-      const response = await this.http.post<any>(url, appointmentInfo).toPromise();
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
+      });
+
+      const response = await this.http.post<any>(url, appointmentInfo, { headers }).toPromise();
       return response;
 
     } catch (error: any) {
@@ -39,12 +48,16 @@ export class AppointmentService {
   async getAllAppointments() {
 
     try {
-      
-      const url = environment.apiUrl + 'api/appointment/getAllAppointments/' + this.auth.userId;
-      const result = await this.http.get<any>(url).toPromise();
+
+      const url = environment.apiUrl + 'api/appointment/getAllAppointments/' + localStorage.getItem('User_ID');
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
+      });
+
+      const result = await this.http.get<any>(url, { headers }).toPromise();
       return result;
 
-    } catch(error) {
+    } catch (error) {
 
     }
 

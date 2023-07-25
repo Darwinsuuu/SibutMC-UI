@@ -1,14 +1,16 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NewUserAccount, UpdatePersonalInfo } from 'src/app/_models/UserModel';
 import { environment } from 'src/environments/environment';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserServiceService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private auth: AuthService) { }
 
   async createNewPatient(patientInfo: NewUserAccount): Promise<any> {
 
@@ -34,12 +36,16 @@ export class UserServiceService {
 
 
 
-  async userInformation(userId: string): Promise<any> {
+  async userInformation(): Promise<any> {
 
     try {
 
-      const url = environment.apiUrl + 'api/patient/getPatientInfo/' + userId;
-      const response = await this.http.get<any>(url).toPromise();
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
+      });
+
+      const url = environment.apiUrl + 'api/patient/getPatientInfo/' + localStorage.getItem('User_ID');
+      const response = await this.http.get<any>(url, { headers }).toPromise();
       return response;
 
     } catch (error: any) {
@@ -63,8 +69,12 @@ export class UserServiceService {
 
     try {
 
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
+      });
+
       const url = environment.apiUrl + 'api/patient/updatePersonalInfo';
-      const response = await this.http.put<any>(url, personalInfo).toPromise();
+      const response = await this.http.put<any>(url, personalInfo, { headers }).toPromise();
       return response;
 
     } catch (error: any) {
@@ -85,8 +95,12 @@ export class UserServiceService {
 
     try {
 
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
+      });
+
       const url = environment.apiUrl + 'api/patient/updateAccountInfo';
-      const response = await this.http.put<any>(url, accountInfo).toPromise();
+      const response = await this.http.put<any>(url, accountInfo, { headers }).toPromise();
       return response;
 
     } catch (error: any) {
@@ -107,8 +121,12 @@ export class UserServiceService {
 
     try {
 
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
+      });
+
       const url = environment.apiUrl + 'api/patient/updateContactInfo';
-      const response = await this.http.put<any>(url, contactInfo).toPromise();
+      const response = await this.http.put<any>(url, contactInfo, { headers }).toPromise();
       return response;
 
     } catch (error: any) {
@@ -130,8 +148,12 @@ export class UserServiceService {
 
     try {
 
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
+      });
+
       const url = environment.apiUrl + 'api/patient/updateEmegencyContactInfo';
-      const response = await this.http.put<any>(url, emegencyContactInfo).toPromise();
+      const response = await this.http.put<any>(url, emegencyContactInfo, { headers }).toPromise();
       return response;
 
     } catch (error: any) {
@@ -151,8 +173,12 @@ export class UserServiceService {
 
     try {
 
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
+      });
+
       const url = environment.apiUrl + 'api/patient/updateMedicalInfo';
-      const response = await this.http.put<any>(url, medicalInfo).toPromise();
+      const response = await this.http.put<any>(url, medicalInfo, { headers }).toPromise();
       return response;
 
     } catch (error: any) {
