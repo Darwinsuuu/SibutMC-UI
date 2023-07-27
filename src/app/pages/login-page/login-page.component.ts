@@ -80,8 +80,13 @@ export class LoginPageComponent implements OnInit, AfterContentInit {
       const result = await this.auth.login(credentials, authPath);
 
       if (result.success === true) {
+        console.log(result)
         this.validCredentials = true;
-        this.route.navigate(['/appointment'])
+        if(result.userType == 3) {
+          this.route.navigate(['/appointment'])
+        } else {
+          this.route.navigate(['/dashboard'])
+        }
       } else {
         this.validCredentials = false;
       }

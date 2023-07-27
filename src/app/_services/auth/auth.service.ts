@@ -31,6 +31,10 @@ export class AuthService {
     return localStorage.getItem('JWT_TOKEN');
   }
 
+  public getUserType(): string | null {
+    return localStorage.getItem('User_Type');
+  }
+
   private clearAuthToken(): void {
     this.isLoggedInStatus = false;
     localStorage.removeItem('JWT_TOKEN');

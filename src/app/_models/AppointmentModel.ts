@@ -24,6 +24,7 @@ export interface NewAppointment {
 export interface GetAllAppointmentLists {
     appointment_id: number;
     patient_fullname: string;
+    contact_no: string;
     appointed_date: Date;
     appointed_time: string | null;
     status: number;

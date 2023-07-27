@@ -5,7 +5,7 @@
 
     <br>
 
-    <form [formGroup]="formData">
+    <form [formGroup]="formData" (ngSubmit)="approveAppointment(formData.value)">
         <mat-form-field appearance="outline" class="!w-[100%]">
             <mat-label>Time Appointed</mat-label>
             <input matInput type="time" formControlName="time">
@@ -14,17 +14,20 @@
         <mat-form-field appearance="outline" class="!w-[100%]">
             <mat-label>Physician</mat-label>
             <mat-select formControlName="physician">
-                <mat-option value="Male">Doctor 1</mat-option>
-                <mat-option value="Female">Doctor 2</mat-option>
-                <mat-option value="Female">Doctor 3</mat-option>
+                <mat-option *ngFor="let physician of physicianList" [value]="physician.id"
+                    class="!capitalize">{{physician.firstname}} {{physician.middlename}}
+                    {{physician.lastname}}</mat-option>
             </mat-select>
         </mat-form-field>
+
+
+        <div class="flex flex-row items-center justify-end gap-3 mt-5">
+            <button mat-raised-button type="button" [mat-dialog-close]="false" class="hover:!bg-slate-300">Close</button>
+            <button mat-raised-button type="submit" [disabled]="formData.invalid"
+                color="primary">Approve</button>
+        </div>
     </form>
 
 
-    <div class="flex flex-row items-center justify-end gap-3 mt-5">
-        <button mat-raised-button [mat-dialog-close]="false" class="hover:!bg-slate-300">Close</button>
-        <button mat-raised-button [mat-dialog-close]="formData.value" [disabled]="formData.invalid" color="primary">Approve</button>
-    </div>
 
 </div>

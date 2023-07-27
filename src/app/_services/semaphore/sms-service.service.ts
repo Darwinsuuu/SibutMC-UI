@@ -23,4 +23,33 @@ export class SmsServiceService {
 
   }
 
+
+  async sendDeclineMsg(credentails: any) {
+    
+    try {
+
+      const url = environment.apiUrl + 'api/semaphore/sendDeclineMsg'
+      const result = await this.http.post<OTPMessageModel>(url, credentails).toPromise();
+      return result;
+    } catch(error) {
+      return error;
+    }
+
+  }
+
+
+  
+  async sendNotificationMsg(credentails: any) {
+    
+    try {
+
+      const url = environment.apiUrl + 'api/semaphore/sendNotificationMsg'
+      const result = await this.http.post<OTPMessageModel>(url, credentails).toPromise();
+      return result;
+    } catch(error) {
+      return error;
+    }
+
+  }
+
 }

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ViewChild, OnInit, Input, SimpleChanges, OnChanges} from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
@@ -11,31 +11,54 @@ import { ModalArchiveEmployeeComponent } from '../../modal/modal-archive-employe
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ModalEditEmployeeComponent } from '../../modal/modal-edit-employee/modal-edit-employee.component';
+import { EmployeeService } from 'src/app/_services/employee/employee.service';
 
 @Component({
   selector: 'app-manage-employee',
   templateUrl: './manage-employee.component.html',
   styleUrls: ['./manage-employee.component.scss']
 })
-export class ManageEmployeeComponent implements AfterViewInit {
+
+export class ManageEmployeeComponent implements AfterViewInit, OnInit, OnChanges {
 
   faPencil = faPencil;
   faTrashCan = faTrashCan;
 
   displayedColumns: string[] = ['fullname', 'position', 'action'];
-  dataSource: MatTableDataSource<EmployeeList>;
+  dataSource!: MatTableDataSource<EmployeeList>;
+
+  @Input() employeeList: any[] = [];
+  isLoading: boolean = true;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private dialog: MatDialog,  
-              private snackBar: MatSnackBar) {
-    this.dataSource = new MatTableDataSource(staffList);
+              private snackBar: MatSnackBar,
+              private employeeService: EmployeeService) {
+                setTimeout(() => {
+                  this.dataSource = new MatTableDataSource(this.employeeList);
+                }, 1000);
+  }
+
+  ngOnInit(): void {
+
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    if (this.dataSource && this.employeeList && this.employeeList.length > 0) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['employeeList'] && !changes['employeeList'].firstChange) {
+      // Update dataSource when appointmentList changes
+      setTimeout(() => {
+        this.dataSource.data = this.employeeList;
+      }, 1000);
+    }
   }
 
   applyFilter(event: Event) {
@@ -48,18 +71,20 @@ export class ManageEmployeeComponent implements AfterViewInit {
   }
 
 
-  openArchiveEmployee(id: number) {
+  openArchiveEmployee(employeeInfo: any) {
 
-    let fullname = staffList.find(x => x.id === id)?.fullname;
+    let fullname = employeeInfo.firstname;
 
     this.dialog.open(ModalArchiveEmployeeComponent, {
-      data: { employeeFullname: fullname }
+      data: { employeeFullname: fullname.toUpperCase() }
     }).afterClosed().subscribe((res: boolean) => {
-      console.log(res)
+
       if(res) {
         // api call here
+        this.employeeService.deleteEmployee(employeeInfo.id);
+        this.getEmployees();
 
-        this.snackBar.open("Account was successfully deleted!", "", {
+        this.snackBar.open("Account was successfully archived!", "", {
           duration: 3000,
           verticalPosition: "top",
           panelClass: "danger-snackbar"
@@ -71,24 +96,28 @@ export class ManageEmployeeComponent implements AfterViewInit {
   }
 
 
-
-  openEditEmployee(id: number) {
+  async getEmployees() {
+  
+    const response = await this.employeeService.getAllEmployees();
     
-    let dummyCred = {
-      id: 1,
-      firstname: "carty king",
-      middlename: "correa",
-      lastname: "paglinawan",
-      position: "Barangay Health Worker (BHW)",
+    if(response.success) {
+      this.employeeList = response.result
+      this.dataSource.data = this.employeeList;
     }
 
+  }
+
+
+  openEditEmployee(employeeInfo: any) {
+
     this.dialog.open(ModalEditEmployeeComponent, {
-      data: { credentials: dummyCred },
+      data: { credentials: employeeInfo },
       height: "fit-content",
       maxHeight: "calc(100vh - 10px)"
     }).afterClosed().subscribe((res: any) => {
       if(res) {
         // api call here
+        this.getEmployees();
 
         this.snackBar.open("Successfully updated!", "", {
           duration: 3000,

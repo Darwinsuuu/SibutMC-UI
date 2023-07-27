@@ -21,7 +21,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./record.component.scss']
 })
 export class RecordComponent {
-
+ 
   pageTitle: string = "Patient Medical Record"
   faPrint = faPrint;
 

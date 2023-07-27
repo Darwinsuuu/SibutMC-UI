@@ -1,7 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeeUpdate } from 'src/app/_models/EmployeeModel';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { EmployeeService } from 'src/app/_services/employee/employee.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-modal-edit-employee',
@@ -11,8 +13,10 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export class ModalEditEmployeeComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-    private formBuilder: FormBuilder) {
+  constructor(private dialogRef: MatDialogRef<ModalEditEmployeeComponent>,
+              private formBuilder: FormBuilder,
+              private employeeService: EmployeeService,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
   employeeCredentials: FormGroup = this.formBuilder.group({
@@ -35,10 +39,25 @@ export class ModalEditEmployeeComponent implements OnInit {
   }
 
 
-  editEmployeeCredentials(credentials: EmployeeUpdate) {
+  async editEmployeeCredentials(credentials: EmployeeUpdate) {
 
     if (this.employeeCredentials.valid) {
       console.log(credentials)
+
+      const result = await this.employeeService.updateEmployeeInfo(credentials)
+      if (result.success) {
+        Swal.fire({
+          title: "Success",
+          text: result.message,
+          icon: 'success',
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.dialogRef.close(true);
+          }
+        });
+      }
+
     }
 
   }

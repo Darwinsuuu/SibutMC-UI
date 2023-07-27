@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { NewAppointment } from 'src/app/_models/AppointmentModel';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
-import { httpHeader } from '../header';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,7 @@ import { httpHeader } from '../header';
 export class AppointmentService {
 
   constructor(private http: HttpClient,
-    private auth: AuthService) {
+              private auth: AuthService) {
   }
 
 
@@ -32,10 +31,38 @@ export class AppointmentService {
     } catch (error: any) {
 
       if (error.status === 500) {
-        console.error('An internal server error occurred. Please try again later. ');
+        console.error('An internal server error occurred. Please try again later.');
         console.error(error)
       } else {
-        console.error('An error occurred. Please try again. ');
+        console.error('An error occurred. Please try again.');
+        console.error(error)
+      }
+      throw error.error;
+
+    }
+
+  }
+
+
+  async getAllAppointmentsByPatient() {
+
+    try {
+
+      const url = environment.apiUrl + 'api/appointment/getAllAppointmentsByPatient/' + localStorage.getItem('User_ID');
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
+      });
+
+      const result = await this.http.get<any>(url, { headers }).toPromise();
+      return result;
+
+    } catch (error: any) {
+
+      if (error.status === 500) {
+        console.error('An internal server error occurred. Please try again later.');
+        console.error(error)
+      } else {
+        console.error('An error occurred. Please try again.');
         console.error(error)
       }
       throw error.error;
@@ -49,7 +76,7 @@ export class AppointmentService {
 
     try {
 
-      const url = environment.apiUrl + 'api/appointment/getAllAppointments/' + localStorage.getItem('User_ID');
+      const url = environment.apiUrl + 'api/appointment/getAllAppointments';
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
       });
@@ -57,10 +84,105 @@ export class AppointmentService {
       const result = await this.http.get<any>(url, { headers }).toPromise();
       return result;
 
-    } catch (error) {
+    } catch (error: any) {
+
+      if (error.status === 500) {
+        console.error('An internal server error occurred. Please try again later.');
+        console.error(error)
+      } else {
+        console.error('An error occurred. Please try again.');
+        console.error(error)
+      }
+      throw error.error;
 
     }
 
   }
+
+
+  async completeAppointment(data: any) {
+    
+    try {
+
+      const url = environment.apiUrl + 'api/appointment/completeAppointment';
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
+      });
+
+      const result = await this.http.post<any>(url, data, { headers }).toPromise();
+      return result;
+
+    } catch(error: any) {
+      
+      if (error.status === 500) {
+        console.error('An internal server error occurred. Please try again later.');
+        console.error(error);
+      } else {
+        console.error('An error occurred. Please try again.');
+        console.error(error);
+      }
+      throw error.error;
+
+    }
+
+  }
+
+
+
+  async approveAppointment(data: any) {
+    
+    try {
+
+      const url = environment.apiUrl + 'api/appointment/approveAppointment';
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
+      });
+
+      const result = await this.http.post<any>(url, data, { headers }).toPromise();
+      return result;
+
+    } catch(error: any) {
+      
+      if (error.status === 500) {
+        console.error('An internal server error occurred. Please try again later.');
+        console.error(error);
+      } else {
+        console.error('An error occurred. Please try again.');
+        console.error(error);
+      }
+      throw error.error;
+
+    }
+
+  }
+  
+
+  async declineAppointment(data: any) {
+    
+    try {
+
+      const url = environment.apiUrl + 'api/appointment/declineAppointment';
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
+      });
+
+      const result = await this.http.post<any>(url, data, { headers }).toPromise();
+      return result;
+
+    } catch(error: any) {
+      
+      if (error.status === 500) {
+        console.error('An internal server error occurred. Please try again later.');
+        console.error(error);
+      } else {
+        console.error('An error occurred. Please try again.');
+        console.error(error);
+      }
+      throw error.error;
+
+    }
+
+  }
+
 
 }

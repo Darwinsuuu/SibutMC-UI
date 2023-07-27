@@ -23,14 +23,15 @@ export class AppointmentsComponent implements OnInit {
   isLoading: boolean = true;
 
   constructor(private titleService: Title,
-              private auth: AuthService,
+              public auth: AuthService,
               private dialog: MatDialog,
               private appointmentService: AppointmentService) {
         this.titleService.setTitle("Sibut Medicare | Appointments");
   }
 
   ngOnInit(): void {
-    this.getAllAppointmentLists()
+    this.getAllAppointmentsByPatient()
+    console.log(this.auth.getUserType())
   }
 
 
@@ -55,7 +56,7 @@ export class AppointmentsComponent implements OnInit {
               confirmButtonText: 'OK'
             }).then((result) => {
               if (result.isConfirmed) {
-                this.getAllAppointmentLists();
+                this.getAllAppointmentsByPatient();
               }
             });
           }
@@ -68,9 +69,16 @@ export class AppointmentsComponent implements OnInit {
 
 
   
-  async getAllAppointmentLists() {
+  async getAllAppointmentsByPatient() {
 
-    const response = await this.appointmentService.getAllAppointments();
+    const userType = this.auth.getUserType();
+    var response;
+    if(userType == '3') {
+      response = await this.appointmentService.getAllAppointmentsByPatient();
+    } else {
+      response =  await this.appointmentService.getAllAppointments();
+    }
+
     if(response.success) {
       this.allAppointmentList = response.result
       setTimeout(() => {
@@ -80,9 +88,8 @@ export class AppointmentsComponent implements OnInit {
 
   }
 
-
   onTabChange(event: any ) {
-    this.getAllAppointmentLists();
+    this.getAllAppointmentsByPatient();
   }
 
 }

@@ -24,7 +24,7 @@ const routes: Routes = [
   // Main Pages
   { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
   { path: 'employees', component: EmployeesComponent, canActivate: [authGuard] },
-  { path: 'appointment', component: AppointmentsComponent },
+  { path: 'appointment', component: AppointmentsComponent, canActivate: [authGuard] },
   { path: 'patients', component: PatientsComponent, canActivate: [authGuard] },
   { path: 'record/:id', component: RecordComponent, canActivate: [authGuard] },
   { path: 'activity', component: ActivityLogComponent, canActivate: [authGuard] },

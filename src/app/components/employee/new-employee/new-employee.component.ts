@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EmployeeInsert } from 'src/app/_models/EmployeeModel';
+import { EmployeeService } from '../../../_services/employee/employee.service';
+import Swal from 'sweetalert2'; 
 
 @Component({
   selector: 'app-new-employee',
@@ -11,7 +13,8 @@ import { EmployeeInsert } from 'src/app/_models/EmployeeModel';
 export class NewEmployeeComponent {
 
   constructor(private formBuilder: FormBuilder,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private employeeService: EmployeeService) {
 
   }
   
@@ -33,20 +36,28 @@ export class NewEmployeeComponent {
 
 
 
-  submitEmployeeCredentials(credentials: EmployeeInsert) {
+  async submitEmployeeCredentials(credentials: EmployeeInsert) {
     
-    if(this.employeeCredentials.valid) {
-      console.log(credentials)
+    try {
 
-      // api call here
-      this.snackBar.open("Account was successfully created!", "", {
-        duration: 3000,
-        verticalPosition: "top",
-        panelClass: "success-snackbar"
-      });
+      if(this.employeeCredentials.valid) {
+  
+        const response = await this.employeeService.createNewEmployee(credentials);
 
-      this.employeeCredentials.reset();
-      this.myForm!.resetForm();
+        if(response.success) {
+          // api call here
+          this.snackBar.open("Account was successfully created!", "", {
+            duration: 3000,
+            verticalPosition: "top",
+            panelClass: "success-snackbar"
+          });
+    
+          this.employeeCredentials.reset();
+          this.myForm!.resetForm();
+        }
+      }
+      
+    } catch(error) {
 
     }
 

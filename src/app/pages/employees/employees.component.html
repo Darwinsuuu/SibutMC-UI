@@ -1,10 +1,12 @@
+<app-loading-screen *ngIf="isLoading"></app-loading-screen>
+
 <div class="relative top-10 py-10 px-5 w-[100vw] lg:pl-[280px]">
     <app-header [title]="pageTitle"></app-header>
 
-    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center" animationDuration="500ms" class="mt-5">
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center" animationDuration="500ms" class="mt-5" (selectedTabChange)="onTabChange($event)">
         
         <mat-tab label="Manage Employees" class="!font-semibold">
-            <app-manage-employee></app-manage-employee>
+            <app-manage-employee [employeeList]="employeeList"></app-manage-employee>
         </mat-tab>
 
         <mat-tab label="New Employees" class="!font-semibold">

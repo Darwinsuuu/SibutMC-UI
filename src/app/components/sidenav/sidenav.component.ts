@@ -67,7 +67,7 @@ export class SidenavComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log(this.access)
+    
   }
 
   navToggle() {
