@@ -81,7 +81,7 @@ export class ApprovedAppointmentsComponent implements AfterViewInit, OnInit, OnC
     // api call here
     Swal.fire({
       title: 'Complete Appointment',
-      text: "Are you sure you want this appointment is complete?",
+      text: "Are you sure you want this appointment to complete?",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes'
@@ -152,8 +152,6 @@ export class ApprovedAppointmentsComponent implements AfterViewInit, OnInit, OnC
     let patientInfo = this.appointmentList.find(x => x.appointment_id === id);
 
 
-    console.log(patientInfo)
-
     let credentials = {
       fullname: patientInfo?.patient_fullname.toUpperCase(),
       contact_no: patientInfo?.contact_no,
@@ -195,6 +193,25 @@ export class ApprovedAppointmentsComponent implements AfterViewInit, OnInit, OnC
       this.appointmentList = response.result;
       this.dataSource.data = this.appointmentList.filter(x => x.status === 2);
     }
+  }
+
+
+
+  
+  convertTo12HourFormat(timeString: any) {
+    // Parse the input time string to extract hours and minutes
+    const [hours, minutes] = timeString.split(':').map(Number);
+  
+    // Check if the time is in the AM or PM period
+    const period = hours >= 12 ? 'PM' : 'AM';
+  
+    // Convert the hours to 12-hour format
+    const hours12 = hours % 12 || 12;
+  
+    // Create the formatted time string
+    const formattedTime = `${hours12}:${minutes.toString().padStart(2, '0')} ${period}`;
+  
+    return formattedTime;
   }
 
 

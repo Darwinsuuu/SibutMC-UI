@@ -21,10 +21,11 @@ export class AuthService {
    }
 
 
-  private storeAuthToken(token: string, userId : string, userType: string): void {
+  private storeAuthToken(token: string, userId : string, userType: string, fullname: string): void {
     localStorage.setItem('JWT_TOKEN', token);
     localStorage.setItem('User_ID', userId);
     localStorage.setItem('User_Type', userType);
+    localStorage.setItem('User_Fullname', fullname);
   }
 
   private getAuthToken(): string | null {
@@ -35,11 +36,16 @@ export class AuthService {
     return localStorage.getItem('User_Type');
   }
 
+  public getFullName(): string | null {
+    return localStorage.getItem('User_Fullname');
+  }
+
   private clearAuthToken(): void {
     this.isLoggedInStatus = false;
     localStorage.removeItem('JWT_TOKEN');
     localStorage.removeItem('User_ID');
     localStorage.removeItem('User_Type');
+    localStorage.removeItem('User_Fullname');
   }
 
 
@@ -57,8 +63,9 @@ export class AuthService {
         const authToken = response.token;
         const userId = response.userId;
         const userType = response.userType;
+        const fullname = response.fullname;
 
-        this.storeAuthToken(authToken, userId, userType);
+        this.storeAuthToken(authToken, userId, userType, fullname);
 
       }
       return response;

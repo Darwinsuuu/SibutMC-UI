@@ -66,4 +66,21 @@ export class AllAppointmentsComponent implements AfterViewInit, OnInit, OnChange
   }
 
 
+  convertTo12HourFormat(timeString: any) {
+    // Parse the input time string to extract hours and minutes
+    const [hours, minutes] = timeString.split(':').map(Number);
+  
+    // Check if the time is in the AM or PM period
+    const period = hours >= 12 ? 'PM' : 'AM';
+  
+    // Convert the hours to 12-hour format
+    const hours12 = hours % 12 || 12;
+  
+    // Create the formatted time string
+    const formattedTime = `${hours12}:${minutes.toString().padStart(2, '0')} ${period}`;
+  
+    return formattedTime;
+  }
+
+
 }

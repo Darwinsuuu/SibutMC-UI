@@ -29,6 +29,7 @@ export class RecordComponent {
   dataSource: MatTableDataSource<MedicalRecordData>;
 
   patientInfo: any = {};
+  medicalInfo: any[] = [];
   isLoading: boolean = true;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -37,13 +38,14 @@ export class RecordComponent {
   constructor(private titleService: Title, 
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private auth: AuthService,
+    public auth: AuthService,
     private userService: UserServiceService) {
     this.titleService.setTitle("Sibut Medicare | Medical Record");
-    this.dataSource = new MatTableDataSource(dummy);
+    this.dataSource = new MatTableDataSource(this.medicalInfo);
   }
   ngOnInit(): void {
-    this.getPatientInfo()
+    this.getPatientInfo();
+    this.getPatientMedicalInformation();
   }
 
   ngAfterViewInit() {
@@ -65,7 +67,8 @@ export class RecordComponent {
 
     try {
       
-      const response = await this.userService.userInformation();
+      const userId = localStorage.getItem('User_Type') === '3' ? localStorage.getItem('User_ID') : this.recordURL;
+      const response = await this.userService.userInformation(userId);
 
       if (!response.success) {
         Swal.fire({
@@ -109,6 +112,44 @@ export class RecordComponent {
 
   }
 
+
+  async getPatientMedicalInformation() {
+
+    const response = await this.userService.getPatientMedicalInformation(this.recordURL);
+
+    this.medicalInfo = response.result;
+    this.dataSource.data = this.medicalInfo;
+    console.log(response);
+
+  }
+
+
+  get recordURL() {
+
+    const url = window.location.href;
+    const parts = url.split("/");
+    const recordURL = parts[parts.length - 1];
+    return recordURL;
+
+  }
+
+
+  
+  convertTo12HourFormat(timeString: any) {
+    // Parse the input time string to extract hours and minutes
+    const [hours, minutes] = timeString.split(':').map(Number);
+  
+    // Check if the time is in the AM or PM period
+    const period = hours >= 12 ? 'PM' : 'AM';
+  
+    // Convert the hours to 12-hour format
+    const hours12 = hours % 12 || 12;
+  
+    // Create the formatted time string
+    const formattedTime = `${hours12}:${minutes.toString().padStart(2, '0')} ${period}`;
+  
+    return formattedTime;
+  }
 
   onPrint(div: any) {
     const doc = new jsPDF({

@@ -8,6 +8,7 @@ import { appointments } from 'src/app/_models/AppointmentModel';
 import { faCheck, faXmark, faBell } from '@fortawesome/free-solid-svg-icons';
 import { PatientList } from 'src/app/_models/PatientModel';
 import { patients } from '../patients';
+import { UserServiceService } from 'src/app/_services/user/user-service.service';
 
 @Component({
   selector: 'app-manage-patients',
@@ -18,25 +19,32 @@ export class ManagePatientsComponent implements AfterViewInit, OnInit {
   faCheck = faCheck;
   faXmark = faXmark;
   faBell = faBell;
+  patientList: PatientList[] = [];
+  isLoading: boolean = true;
 
-
-  displayedColumns: string[] = ['fullname', 'marital_status', 'gender', 'email', 'contact_no', 'action'];
-  dataSource: MatTableDataSource<PatientList>;
+  displayedColumns: string[] = ['fullname', 'marital_status', 'gender', 'email', 'contact_no'];
+  dataSource!: MatTableDataSource<PatientList>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private dialog: MatDialog,  
-              private snackBar: MatSnackBar) {
-    this.dataSource = new MatTableDataSource(patients);
+              private snackBar: MatSnackBar,
+              private userService: UserServiceService) {
+                setTimeout(() => {
+                  this.dataSource = new MatTableDataSource(this.patientList);
+                }, 1000);
   }
 
   ngOnInit(): void {
+    this.getAllPatientInformation()
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    if (this.dataSource && this.patientList && this.patientList.length > 0) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
   }
 
   applyFilter(event: Event) {
@@ -46,6 +54,18 @@ export class ManagePatientsComponent implements AfterViewInit, OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+
+  async getAllPatientInformation() {
+
+    const response = await this.userService.getAllPatientInformation();
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1000);
+    this.patientList = response.result;
+    console.log(this.patientList);
+
   }
 
 }

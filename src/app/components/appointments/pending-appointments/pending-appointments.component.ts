@@ -75,6 +75,15 @@ export class PendingAppointmentsComponent implements AfterViewInit, OnInit, OnCh
 
   approveAppointment(id: number) {
 
+    let patientInfo = this.appointmentList.find(x => x.appointment_id === id);
+
+
+    let credentials = {
+      fullname: patientInfo?.patient_fullname.toUpperCase(),
+      contact_no: patientInfo?.contact_no,
+      date: patientInfo?.appointed_date,
+      time: patientInfo?.appointed_time,
+    }
 
     this.dialog.open(ModalApproveAppointmentComponent, {
       data: { appointmentId: id },
@@ -83,8 +92,12 @@ export class PendingAppointmentsComponent implements AfterViewInit, OnInit, OnCh
     }).afterClosed().subscribe((res: any) => {
 
       if (res) {
+
+        credentials.time = this.convertTo12HourFormat(res.time);
+
         // api call here
         this.getAllAppointments();
+        this.semaphoreService.sendApproveAppointmentMessage(credentials);
 
         this.snackBar.open("Successfully approved!", "", {
           duration: 3000,
@@ -146,8 +159,28 @@ export class PendingAppointmentsComponent implements AfterViewInit, OnInit, OnCh
     var response =  await this.appointmentService.getAllAppointments();
     if(response.success) {
       this.appointmentList = response.result;
-      this.dataSource.data = this.appointmentList.filter(x => x.status === 1);
+      setTimeout(() => {
+        this.dataSource.data = this.appointmentList.filter(x => x.status === 1);
+      }, 1000);
     }
+  }
+
+  
+  
+  convertTo12HourFormat(timeString: any) {
+    // Parse the input time string to extract hours and minutes
+    const [hours, minutes] = timeString.split(':').map(Number);
+  
+    // Check if the time is in the AM or PM period
+    const period = hours >= 12 ? 'PM' : 'AM';
+  
+    // Convert the hours to 12-hour format
+    const hours12 = hours % 12 || 12;
+  
+    // Create the formatted time string
+    const formattedTime = `${hours12}:${minutes.toString().padStart(2, '0')} ${period}`;
+  
+    return formattedTime;
   }
 
 

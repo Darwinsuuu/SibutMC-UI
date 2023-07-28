@@ -36,7 +36,7 @@ export class UserServiceService {
 
 
 
-  async userInformation(): Promise<any> {
+  async getAllPatientInformation(): Promise<any> {
 
     try {
 
@@ -44,7 +44,69 @@ export class UserServiceService {
         'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
       });
 
-      const url = environment.apiUrl + 'api/patient/getPatientInfo/' + localStorage.getItem('User_ID');
+      const url = environment.apiUrl + 'api/patient/getAllPatientInformation';
+      const response = await this.http.get<any>(url, { headers }).toPromise();
+      return response;
+
+    } catch (error: any) {
+
+      if (error.status === 500) {
+        console.error('An internal server error occurred. Please try again later. ');
+        console.error(error)
+      } else {
+        console.error('An error occurred. Please try again. ');
+        console.error(error)
+      }
+      throw error.error;
+
+    }
+
+  }
+
+
+  async userInformation(userId: any): Promise<any> {
+
+    try {
+
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
+      });
+
+      const url = environment.apiUrl + 'api/patient/getPatientInfo/' + userId;
+
+      const response = await this.http.get<any>(url, { headers }).toPromise();
+      return response;
+
+    } catch (error: any) {
+
+      if (error.status === 500) {
+        console.error('An internal server error occurred. Please try again later. ');
+        console.error(error)
+      } else {
+        console.error('An error occurred. Please try again. ');
+        console.error(error)
+      }
+      throw error.error;
+
+    }
+
+  }
+
+
+  
+
+
+  async getPatientMedicalInformation(userId: any): Promise<any> {
+
+    try {
+
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
+      });
+
+      const url = environment.apiUrl + 'api/patient/getPatientMedicalInformation/' + userId;
+      console.log(url)
+
       const response = await this.http.get<any>(url, { headers }).toPromise();
       return response;
 

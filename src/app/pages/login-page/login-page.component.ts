@@ -25,11 +25,13 @@ export class LoginPageComponent implements OnInit, AfterContentInit {
   }
 
   ngOnInit(): void {
-    const userType = localStorage.getItem('User_Type');
+    const userType = this.auth.getUserType();
     if(userType) {
 
       if(userType === '3') {
         this.route.navigate(["/appointment"]);
+      } else if(userType === '1' || userType === '2') {
+        this.route.navigate(["/dashboard"]);
       }
 
     }
@@ -80,7 +82,6 @@ export class LoginPageComponent implements OnInit, AfterContentInit {
       const result = await this.auth.login(credentials, authPath);
 
       if (result.success === true) {
-        console.log(result)
         this.validCredentials = true;
         if(result.userType == 3) {
           this.route.navigate(['/appointment'])

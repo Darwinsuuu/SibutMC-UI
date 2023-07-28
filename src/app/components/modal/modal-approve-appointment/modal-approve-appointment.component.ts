@@ -36,7 +36,7 @@ export class ModalApproveAppointmentComponent implements OnInit {
 
     if(this.formData.valid) {
       const result = this.appointmentService.approveAppointment(data);
-      this.dialogRef.close(true);
+      this.dialogRef.close(data);
     } else {
       alert('error')
     }

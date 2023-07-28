@@ -36,8 +36,10 @@ export class AccountSettingsComponent implements OnInit {
 
   async getPatientInfo() {
 
+    const userId = localStorage.getItem('User_ID');
+
     try {
-      const response = await this.userService.userInformation();
+      const response = await this.userService.userInformation(userId);
       console.log(response)
       if (!response.success) {
         Swal.fire({

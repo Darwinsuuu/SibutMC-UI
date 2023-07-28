@@ -97,6 +97,9 @@ export class PersonalInfoComponent implements OnInit {
         }).then((result) => {
           if (result.isConfirmed) {
             // Code to execute if the user confirms the alert
+            this.accountInfo.get('password')?.setValue('');
+            this.isPasswordVisible = false;
+            this.accountInfo.get('password')?.setErrors(null);
           }
         });
       }

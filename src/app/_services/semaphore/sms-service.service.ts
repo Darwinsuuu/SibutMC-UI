@@ -52,4 +52,18 @@ export class SmsServiceService {
 
   }
 
+  
+  async sendApproveAppointmentMessage(credentails: any) {
+    
+    try {
+
+      const url = environment.apiUrl + 'api/semaphore/sendApproveAppointmentMessage'
+      const result = await this.http.post<OTPMessageModel>(url, credentails).toPromise();
+      return result;
+    } catch(error) {
+      return error;
+    }
+
+  }
+
 }
