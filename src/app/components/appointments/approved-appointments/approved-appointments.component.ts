@@ -156,7 +156,7 @@ export class ApprovedAppointmentsComponent implements AfterViewInit, OnInit, OnC
       fullname: patientInfo?.patient_fullname.toUpperCase(),
       contact_no: patientInfo?.contact_no,
       date: patientInfo?.appointed_date,
-      time: patientInfo?.appointed_time,
+      time: this.convertTo12HourFormat(patientInfo?.appointed_time),
     }
 
     Swal.fire({
