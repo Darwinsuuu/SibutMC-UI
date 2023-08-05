@@ -48,7 +48,7 @@ export class DeclinedAppointmentsComponent implements AfterViewInit, OnInit, OnC
     if (changes['appointmentList'] && !changes['appointmentList'].firstChange) {
       // Update dataSource when appointmentList changes
       setTimeout(() => {
-        this.dataSource.data = this.appointmentList.filter(x => x.status === 3);
+        this.dataSource = new MatTableDataSource(this.appointmentList.filter(x => x.status === 3));
       }, 1000);
     }
   }

@@ -66,6 +66,7 @@ import { ModalNewAppointmentComponent } from './components/modal/modal-new-appoi
 import { environment } from 'src/environments/environment';
 import { authGuard } from './_services/auth/auth.guard';
 import { RouterModule } from '@angular/router';
+import { ModalCompleteAppointmentComponent } from './components/modal/modal-complete-appointment/modal-complete-appointment.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +104,7 @@ import { RouterModule } from '@angular/router';
     PagenotfoundComponent,
     LoadingScreenComponent,
     ModalNewAppointmentComponent,
+    ModalCompleteAppointmentComponent,
   ],
   imports: [
     BrowserModule,

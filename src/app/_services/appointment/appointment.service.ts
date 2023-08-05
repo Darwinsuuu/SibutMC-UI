@@ -11,7 +11,7 @@ import { AuthService } from '../auth/auth.service';
 export class AppointmentService {
 
   constructor(private http: HttpClient,
-              private auth: AuthService) {
+    private auth: AuthService) {
   }
 
 
@@ -101,7 +101,7 @@ export class AppointmentService {
 
 
   async completeAppointment(data: any) {
-    
+
     try {
 
       const url = environment.apiUrl + 'api/appointment/completeAppointment';
@@ -112,8 +112,8 @@ export class AppointmentService {
       const result = await this.http.post<any>(url, data, { headers }).toPromise();
       return result;
 
-    } catch(error: any) {
-      
+    } catch (error: any) {
+
       if (error.status === 500) {
         console.error('An internal server error occurred. Please try again later.');
         console.error(error);
@@ -128,9 +128,34 @@ export class AppointmentService {
   }
 
 
+  async notifyPatientAppointment(data: any) {
+    try {
+
+      const url = environment.apiUrl + 'api/appointment/notifyPatientAppointment';
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
+      });
+
+      const result = await this.http.post<any>(url, data, { headers }).toPromise();
+      return result;
+
+    } catch (error: any) {
+
+      if (error.status === 500) {
+        console.error('An internal server error occurred. Please try again later.');
+        console.error(error);
+      } else {
+        console.error('An error occurred. Please try again.');
+        console.error(error);
+      }
+      throw error.error;
+
+    }
+  }
+
 
   async approveAppointment(data: any) {
-    
+
     try {
 
       const url = environment.apiUrl + 'api/appointment/approveAppointment';
@@ -141,8 +166,8 @@ export class AppointmentService {
       const result = await this.http.post<any>(url, data, { headers }).toPromise();
       return result;
 
-    } catch(error: any) {
-      
+    } catch (error: any) {
+
       if (error.status === 500) {
         console.error('An internal server error occurred. Please try again later.');
         console.error(error);
@@ -155,10 +180,10 @@ export class AppointmentService {
     }
 
   }
-  
+
 
   async declineAppointment(data: any) {
-    
+
     try {
 
       const url = environment.apiUrl + 'api/appointment/declineAppointment';
@@ -169,8 +194,8 @@ export class AppointmentService {
       const result = await this.http.post<any>(url, data, { headers }).toPromise();
       return result;
 
-    } catch(error: any) {
-      
+    } catch (error: any) {
+
       if (error.status === 500) {
         console.error('An internal server error occurred. Please try again later.');
         console.error(error);

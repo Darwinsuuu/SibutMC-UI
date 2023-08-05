@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { SmsServiceService } from 'src/app/_services/semaphore/sms-service.service';
+import { UserServiceService } from 'src/app/_services/user/user-service.service';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+
 @Component({
 
   selector: 'app-modal-forgot-password',
@@ -9,10 +14,14 @@ import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from
 })
 export class ModalForgotPasswordComponent {
 
-  constructor(private dialog:MatDialog,
-              private formBuilder:FormBuilder) { }
+  constructor(private dialog: MatDialog,
+    private formBuilder: FormBuilder,
+    private smsService: SmsServiceService,
+    private userService: UserServiceService,
+    private router: Router,
+    private dialogRef: MatDialogRef<ModalForgotPasswordComponent>) { }
 
-  
+
   credential: FormGroup = this.formBuilder.group({
     contact_no: ["", [Validators.required, Validators.pattern(/^(09|\+639)\d{9}$/)]]
   })
@@ -23,8 +32,8 @@ export class ModalForgotPasswordComponent {
   })
 
   isPasswordVisible: boolean = false;
-  OTPCodes: string = '';
   validOTPCode: string = Math.floor(100000 + Math.random() * 900000).toString();
+  OTPCodes: string = '';
   btnOTPSend: string = "Send OTP";
   isbtnDisabled: boolean = false;
 
@@ -35,19 +44,55 @@ export class ModalForgotPasswordComponent {
 
   OTPCodeValid() {
     if (this.OTPCodes === this.validOTPCode) {
-      this.passwordCredentials.get('user_id')?.setValue('5');
       return true;
     }
     return false;
   }
 
 
-  sendOTPCode() {
-    if(this.credential.valid) {
-      this.validOTPCode = Math.floor(100000 + Math.random() * 900000).toString();
-      this.startCountdown();
+  async checkContact() {
 
-      // api call here
+    try {
+      if(this.credential.valid) {
+        const response = await this.userService.getUserInfoByContact(this.credential.get('contact_no')?.getRawValue().replace(/^(\+63|0)?(\d+)/, '$2'));
+        console.log(response)
+        if (response.length != 0) {
+          this.passwordCredentials.get('user_id')?.setValue(response[0].user_id);
+          this.sendOTPCode();
+        } else {
+          Swal.fire({
+            title: 'Invalid',
+            text: 'Phone number is not valid',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          }).then((result) => {
+            if (result.isConfirmed) {
+  
+            }
+          });
+        }
+
+      }
+
+    } catch (error: any) {
+
+    }
+
+
+  }
+
+
+  async sendOTPCode() {
+    try {
+      if (this.credential.valid) {
+        this.validOTPCode = Math.floor(100000 + Math.random() * 900000).toString();
+        this.startCountdown();
+
+        // api call here
+        const result: any = await this.smsService.sendOTPCreateAccount({ otp: this.validOTPCode, contact_no: this.credential.get('contact_no')?.getRawValue() })
+      }
+    } catch (error: any) {
+
     }
 
   }
@@ -60,8 +105,8 @@ export class ModalForgotPasswordComponent {
     const interval = setInterval(() => {
       this.btnOTPSend = counter.toString() + "s";
       counter--;
-        
-      if (counter < 0 ) {
+
+      if (counter < 0) {
         clearInterval(interval);
         this.btnOTPSend = "Send OTP";
         this.isbtnDisabled = false;
@@ -69,10 +114,25 @@ export class ModalForgotPasswordComponent {
     }, 1000);
   }
 
-  submitCredentials(credentials: FormGroup) {
-    let data = credentials;
-
+  async submitCredentials(credentials: FormGroup) {
     // api call here
+    if(this.passwordCredentials.valid) {
+      console.log(this.passwordCredentials?.getRawValue())
+      const result = await this.userService.getUserUpdatePassword(credentials);
+      console.log(result)
+      if(result.success) {
+        Swal.fire({
+          title: 'Success',
+          text: 'Password is successfully updated',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.dialogRef.close(true);
+          }
+        });
+      }
+    }
   }
 
 }

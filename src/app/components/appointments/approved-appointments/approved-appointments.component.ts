@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/_services/auth/auth.service';
 import { AppointmentService } from 'src/app/_services/appointment/appointment.service';
 import { SmsServiceService } from 'src/app/_services/semaphore/sms-service.service';
 import Swal from 'sweetalert2';
+import { ModalCompleteAppointmentComponent } from '../../modal/modal-complete-appointment/modal-complete-appointment.component';
 
 
 @Component({
@@ -78,28 +79,53 @@ export class ApprovedAppointmentsComponent implements AfterViewInit, OnInit, OnC
 
     let patientInfo = this.appointmentList.find(x => x.appointment_id === id);
 
-    // api call here
-    Swal.fire({
-      title: 'Complete Appointment',
-      text: "Are you sure you want this appointment to complete?",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes'
-    }).then((result) => {
-      if (result.isConfirmed) {
+    this.dialog.open(ModalCompleteAppointmentComponent, {
+      data: { patientName: patientInfo?.patient_fullname.toUpperCase() },
+      width: "600px",
+      height: "fit-content",
+      maxHeight: "calc(100vh - 10px)"
+    }).afterClosed().subscribe((res: any) => { 
 
-        this.appointmentService.completeAppointment({ appointmentId: patientInfo?.appointment_id });
-        this.getAllAppointments();
+      if(res) {
 
-        // completeAppointment
+        let data = { 
+          appointmentId: patientInfo?.appointment_id, 
+          userRole: this.auth.getUserRole(), 
+          patientName: patientInfo?.patient_fullname, 
+          diagnosis: res 
+        }
+
+        this.appointmentService.completeAppointment(data);
+        setTimeout(() => {      
+          this.getAllAppointments();
+        }, 500);
+
         this.snackBar.open("Appointment completed!", "", {
           duration: 3000,
           verticalPosition: "top",
           panelClass: ['success-snackbar']
         })
-
       }
-    })
+
+    });
+
+    // // api call here
+    // Swal.fire({
+    //   title: 'Complete Appointment',
+    //   text: "Are you sure you want this appointment to complete?",
+    //   icon: 'warning',
+    //   showCancelButton: true,
+    //   confirmButtonText: 'Yes'
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+
+       
+
+    //     // completeAppointment
+       
+
+    //   }
+    // })
 
 
 
@@ -121,11 +147,13 @@ export class ApprovedAppointmentsComponent implements AfterViewInit, OnInit, OnC
 
         let data = {
           id: id,
-          reason: res
+          reason: res,
+          patientName: patientInfo?.patient_fullname.replace(/\b\w/g, (match) => match.toUpperCase()),
+          userRole: this.auth.getUserRole()
         }
 
         let credentials = {
-          fullname: patientInfo?.patient_fullname.toUpperCase(),
+          fullname: patientInfo?.patient_fullname.replace(/\b\w/g, (match) => match.toUpperCase()),
           contact_no: patientInfo?.contact_no,
           reason: res
         }
@@ -151,17 +179,21 @@ export class ApprovedAppointmentsComponent implements AfterViewInit, OnInit, OnC
 
     let patientInfo = this.appointmentList.find(x => x.appointment_id === id);
 
-
     let credentials = {
-      fullname: patientInfo?.patient_fullname.toUpperCase(),
+      fullname: patientInfo?.patient_fullname.replace(/\b\w/g, (match) => match.toUpperCase()),
       contact_no: patientInfo?.contact_no,
       date: patientInfo?.appointed_date,
       time: this.convertTo12HourFormat(patientInfo?.appointed_time),
     }
 
+    let data = {
+      patientName: patientInfo?.patient_fullname.replace(/\b\w/g, (match) => match.toUpperCase()),
+      userRole: this.auth.getUserRole()
+    }
+
     Swal.fire({
       title: 'Send Reminder',
-      text: "Are you sure you want to send a reminder to " + patientInfo?.patient_fullname.toUpperCase() + "?",
+      text: "Are you sure you want to send a reminder to " + patientInfo?.patient_fullname.replace(/\b\w/g, (match) => match.toUpperCase()) + "?",
       icon: 'warning',
       showCancelButton: true,
       // confirmButtonColor: '#d33',
@@ -170,6 +202,7 @@ export class ApprovedAppointmentsComponent implements AfterViewInit, OnInit, OnC
     }).then((result) => {
       if (result.isConfirmed) {
 
+        this.appointmentService.notifyPatientAppointment(data);
         this.semaphoreService.sendNotificationMsg(credentials);
 
         this.snackBar.open("Reminder was sent to the patient", "", {
@@ -190,8 +223,14 @@ export class ApprovedAppointmentsComponent implements AfterViewInit, OnInit, OnC
   async getAllAppointments() {
     var response = await this.appointmentService.getAllAppointments();
     if (response.success) {
+      console.log("======================")
+      console.log(response.success)
+      console.log("======================")
       this.appointmentList = response.result;
-      this.dataSource.data = this.appointmentList.filter(x => x.status === 2);
+      console.log(this.appointmentList)
+      setTimeout(() => {      
+        this.dataSource = new MatTableDataSource(this.appointmentList.filter(x => x.status === 2));
+      }, 1500);
     }
   }
 

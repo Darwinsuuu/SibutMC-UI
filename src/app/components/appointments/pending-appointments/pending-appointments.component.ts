@@ -79,14 +79,14 @@ export class PendingAppointmentsComponent implements AfterViewInit, OnInit, OnCh
 
 
     let credentials = {
-      fullname: patientInfo?.patient_fullname.toUpperCase(),
+      fullname: patientInfo?.patient_fullname.replace(/\b\w/g, (match) => match.toUpperCase()),
       contact_no: patientInfo?.contact_no,
       date: patientInfo?.appointed_date,
       time: patientInfo?.appointed_time,
     }
 
     this.dialog.open(ModalApproveAppointmentComponent, {
-      data: { appointmentId: id },
+      data: { appointmentId: id, fullname: credentials.fullname },
       height: "fit-content",
       maxHeight: "calc(100vh - 10px)"
     }).afterClosed().subscribe((res: any) => {
@@ -119,7 +119,7 @@ export class PendingAppointmentsComponent implements AfterViewInit, OnInit, OnCh
 
 
     this.dialog.open(ModalDeclineAppointmentComponent, {
-      data: { patientName: patientInfo?.patient_fullname.toUpperCase() },
+      data: { patientName: patientInfo?.patient_fullname.replace(/\b\w/g, (match) => match.toUpperCase()) },
       height: "fit-content",
       maxHeight: "calc(100vh - 10px)"
     }).afterClosed().subscribe((res: any) => {
@@ -128,11 +128,15 @@ export class PendingAppointmentsComponent implements AfterViewInit, OnInit, OnCh
 
         let data = {
           id: id,
-          reason: res
+          reason: res,
+          patientName: patientInfo?.patient_fullname.replace(/\b\w/g, (match) => match.toUpperCase()),
+          userRole: this.auth.getUserRole()
         }
 
+        console.log(patientInfo?.patient_fullname)
+
         let credentials = {
-          fullname: patientInfo?.patient_fullname.toUpperCase(),
+          fullname: patientInfo?.patient_fullname.replace(/\b\w/g, (match) => match.toUpperCase()),
           contact_no: patientInfo?.contact_no,
           reason: res
         }
@@ -150,36 +154,36 @@ export class PendingAppointmentsComponent implements AfterViewInit, OnInit, OnCh
         })
       }
     })
-    
+
   }
 
 
 
   async getAllAppointments() {
-    var response =  await this.appointmentService.getAllAppointments();
-    if(response.success) {
+    var response = await this.appointmentService.getAllAppointments();
+    if (response.success) {
       this.appointmentList = response.result;
       setTimeout(() => {
-        this.dataSource.data = this.appointmentList.filter(x => x.status === 1);
+        this.dataSource = new MatTableDataSource(this.appointmentList.filter(x => x.status === 1));
       }, 1000);
     }
   }
 
-  
-  
+
+
   convertTo12HourFormat(timeString: any) {
     // Parse the input time string to extract hours and minutes
     const [hours, minutes] = timeString.split(':').map(Number);
-  
+
     // Check if the time is in the AM or PM period
     const period = hours >= 12 ? 'PM' : 'AM';
-  
+
     // Convert the hours to 12-hour format
     const hours12 = hours % 12 || 12;
-  
+
     // Create the formatted time string
     const formattedTime = `${hours12}:${minutes.toString().padStart(2, '0')} ${period}`;
-  
+
     return formattedTime;
   }
 

@@ -50,7 +50,7 @@ export class CompletedAppointmentsComponent implements AfterViewInit, OnInit, On
     if (changes['appointmentList'] && !changes['appointmentList'].firstChange) {
       // Update dataSource when appointmentList changes
       setTimeout(() => {
-        this.dataSource.data = this.appointmentList.filter(x => x.status === 4);
+        this.dataSource = new MatTableDataSource(this.appointmentList.filter(x => x.status === 4));
       }, 1000);
     }
   }

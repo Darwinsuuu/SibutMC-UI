@@ -151,25 +151,10 @@ export class RecordComponent {
     return formattedTime;
   }
 
-  onPrint(div: any) {
-    const doc = new jsPDF({
-      orientation: "portrait",
-      unit: 'px',
-      format: 'a4',
-    });
+  async onPrint() {
 
-    let marginTop = 0;
-    let marginLeft = 0;
-    let fontFamily = 'helvetica';
+    await this.userService.printMedicalRecord(this.recordURL);
 
-    var img = new Image()
-    img.src = '../../../assets/images/logo.png'
-    doc.addImage(img, 'png', 20, marginTop += 16, 50, 35);
-    doc.setFontSize(16).setTextColor('#3f51b5').setFont('helvetica', 'bold').text("Barangay Medicare", 70, 33);
-    doc.setFontSize(9).setTextColor('#414141').text("Brgy. Sibut, San Jose, Nueva Ecija", 70, 44);
-    doc.html("<h1>test</h1>")
-
-    doc.save("a4.pdf");
   }
 
 

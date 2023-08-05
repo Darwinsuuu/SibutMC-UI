@@ -2,10 +2,9 @@
 
 <div class="relative top-10 py-10 px-5 w-[100vw] lg:pl-[280px]">
     <app-header [title]="pageTitle"></app-header>
-    <p class="!mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem a nostrum tempore eum
-        libero magni modi quam, distinctio quae beatae porro, laudantium dolor fugiat voluptatum.</p>
+    <p class="!mt-3">Please note that medical record is a patient's confidential information. Do not disclose and information to a 3rd party companies. Medical record can only be requested to the medical staff with an the approval of the medical center.</p>
 
-    <button mat-raised-button color="primary" (click)="onPrint('medicalHistory')" *ngIf="auth.getUserType() !== '3'"><fa-icon
+    <button mat-raised-button color="primary" (click)="onPrint()" *ngIf="auth.getUserType() !== '3'"><fa-icon
             [icon]="faPrint"></fa-icon>&nbsp;&nbsp;Print medical record</button>
 
     <div class="py-5" id="medicalHistory">

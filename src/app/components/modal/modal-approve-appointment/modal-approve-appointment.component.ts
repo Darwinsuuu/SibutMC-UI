@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { AppointmentService } from 'src/app/_services/appointment/appointment.service';
+import { AuthService } from 'src/app/_services/auth/auth.service';
 import { EmployeeService } from 'src/app/_services/employee/employee.service';
 
 @Component({
@@ -15,10 +16,13 @@ export class ModalApproveAppointmentComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: any,
               private formBuilder:FormBuilder,
               private employeeService: EmployeeService,
-              private appointmentService: AppointmentService) { }
+              private appointmentService: AppointmentService,
+              private auth: AuthService) { }
 
 
   formData: FormGroup = this.formBuilder.group({
+    patientName: [this.data.fullname, [Validators.required]],
+    userRole: [this.auth.getUserRole(), [Validators.required]],
     appointmentId: [this.data.appointmentId, Validators.required],
     time: ["", Validators.required],
     physician: ["", Validators.required]
@@ -28,6 +32,7 @@ export class ModalApproveAppointmentComponent implements OnInit {
 
 
   ngOnInit(): void {
+    console.log(this.data)
     this.employeeList();
   }
 
@@ -37,10 +42,7 @@ export class ModalApproveAppointmentComponent implements OnInit {
     if(this.formData.valid) {
       const result = this.appointmentService.approveAppointment(data);
       this.dialogRef.close(data);
-    } else {
-      alert('error')
     }
-
 
   }
 
@@ -49,7 +51,6 @@ export class ModalApproveAppointmentComponent implements OnInit {
   async employeeList() {
     const response = await this.employeeService.getAllEmployees();
     this.physicianList = response.result;
-    console.log(this.physicianList)
   }
 
 

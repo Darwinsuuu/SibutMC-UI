@@ -1,0 +1,17 @@
+<div class="w-[100%] max-w-[600px] shadow-lg p-5">
+
+    <h1 class="!font-semibold">Diagnosis</h1>
+    <p>What is/are the patient's diagnosis?</p>
+
+    <br>
+
+    <mat-form-field appearance="outline" class="!w-[100%]">
+        <textarea matInput rows="5" placeholder="Enter message here..." [(ngModel)]="diagnosis"></textarea>
+    </mat-form-field>
+
+    <div class="flex flex-row items-center justify-end gap-3 mt-5">
+        <button mat-raised-button [mat-dialog-close]="false" class="hover:!bg-slate-300">Cancel</button>
+        <button mat-raised-button [mat-dialog-close]="diagnosis" [disabled]="!diagnosis" class="!px-5" color="primary">Approve</button>
+    </div>
+
+</div>

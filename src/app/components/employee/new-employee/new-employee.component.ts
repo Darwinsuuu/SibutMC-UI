@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { EmployeeInsert } from 'src/app/_models/EmployeeModel';
 import { EmployeeService } from '../../../_services/employee/employee.service';
 import Swal from 'sweetalert2'; 
+import { AuthService } from 'src/app/_services/auth/auth.service';
 
 @Component({
   selector: 'app-new-employee',
@@ -14,13 +15,15 @@ export class NewEmployeeComponent {
 
   constructor(private formBuilder: FormBuilder,
               private snackBar: MatSnackBar,
-              private employeeService: EmployeeService) {
+              private employeeService: EmployeeService,
+              private auth: AuthService) {
 
   }
   
   @ViewChild('myForm') myForm: NgForm | undefined;
 
   employeeCredentials: FormGroup = this.formBuilder.group({
+    userRole: [this.auth.getUserRole(), [Validators.required]],
     firstname: ["", [Validators.required, Validators.pattern(/^[A-Za-z -]+$/)]],
     middlename: ["", [Validators.pattern(/^[A-Za-z -]+$/)]],
     lastname: ["", [Validators.required, Validators.pattern(/^[A-Za-z -]+$/)]],

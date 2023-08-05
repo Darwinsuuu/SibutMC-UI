@@ -31,6 +31,8 @@ export class AllAppointmentsComponent implements AfterViewInit, OnInit, OnChange
               private snackBar: MatSnackBar) {
                 setTimeout(() => {
                   this.dataSource = new MatTableDataSource(this.appointmentList);
+                  this.dataSource.paginator = this.paginator;
+                  this.dataSource.sort = this.sort;
                 }, 1000);
   }
 
@@ -49,8 +51,9 @@ export class AllAppointmentsComponent implements AfterViewInit, OnInit, OnChange
     if (changes['appointmentList'] && !changes['appointmentList'].firstChange) {
       // Update dataSource when appointmentList changes
       setTimeout(() => {
-        this.dataSource.data = this.appointmentList;
+        this.dataSource = new MatTableDataSource(this.appointmentList);
       }, 1000);
+
     }
   }
 

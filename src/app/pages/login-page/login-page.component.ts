@@ -68,6 +68,8 @@ export class LoginPageComponent implements OnInit, AfterContentInit {
     this.dialog.open(ModalForgotPasswordComponent, {
       width: '100%',
       maxWidth: '520px',
+      height: 'fit-content',
+      maxHeight: '620px',
       enterAnimationDuration: 500,
       exitAnimationDuration: 500,
     });

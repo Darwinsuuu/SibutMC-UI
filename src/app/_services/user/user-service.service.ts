@@ -63,6 +63,60 @@ export class UserServiceService {
 
   }
 
+  async getUserInfoByContact(contact: any) {
+
+    try {
+
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
+      });
+
+      const url = environment.apiUrl + 'api/patient/getUserInfoByContact/';
+
+      const response = await this.http.post<any>(url, { contact_no: contact }, { headers }).toPromise();
+      return response.result;
+
+    } catch (error: any) {
+
+      if (error.status === 500) {
+        console.error('An internal server error occurred. Please try again later. ');
+        console.error(error)
+      } else {
+        console.error('An error occurred. Please try again. ');
+        console.error(error)
+      }
+      throw error.error;
+
+    }
+  }
+
+
+  async getUserUpdatePassword(data: any) {
+    try {
+
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
+      });
+
+      const url = environment.apiUrl + 'api/patient/getUserUpdatePassword/';
+
+      const response = await this.http.post<any>(url, data, { headers }).toPromise();
+      return response;
+
+    } catch (error: any) {
+
+      if (error.status === 500) {
+        console.error('An internal server error occurred. Please try again later. ');
+        console.error(error)
+      } else {
+        console.error('An error occurred. Please try again. ');
+        console.error(error)
+      }
+      throw error.error;
+
+    }
+  }
+
 
   async userInformation(userId: any): Promise<any> {
 
@@ -93,7 +147,7 @@ export class UserServiceService {
   }
 
 
-  
+
 
 
   async getPatientMedicalInformation(userId: any): Promise<any> {
@@ -256,4 +310,34 @@ export class UserServiceService {
 
   }
 
+
+
+  async printMedicalRecord(user_id: any) {
+    try {
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${localStorage.getItem('JWT_TOKEN')}`,
+      });
+
+      const url = environment.apiUrl + 'api/patient/printPatientMedicalRecord';
+      const response = await this.http
+        .post(url, { user_id: user_id }, { headers, responseType: 'blob' })
+        .toPromise();
+
+      if (response) {
+        this.downloadBlobAsPDF(response, 'medical_record.pdf');
+      } else {
+        console.error('No response received from the server');
+      }
+    } catch (error: any) {
+      console.error('Error:', error);
+    }
+  }
+
+  private downloadBlobAsPDF(blob: Blob, fileName: string) {
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = fileName;
+    link.click();
+    window.URL.revokeObjectURL(link.href);
+  }
 }

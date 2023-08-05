@@ -25,6 +25,7 @@ export class AuthService {
     localStorage.setItem('JWT_TOKEN', token);
     localStorage.setItem('User_ID', userId);
     localStorage.setItem('User_Type', userType);
+    localStorage.setItem('User_Role', ((userType === '1' ? 'Admin' : userType === '2' ? 'Staff' : fullname).replace(/\b\w/g, (match) => match.toUpperCase())));
     localStorage.setItem('User_Fullname', fullname);
   }
 
@@ -33,7 +34,11 @@ export class AuthService {
   }
 
   public getUserType(): string | null {
-    return localStorage.getItem('User_Type');
+    return localStorage.getItem('User_Type')?.replace(/\b\w/g, (match) => match.toUpperCase()) || '';
+  }
+
+  public getUserRole(): string | null {
+    return localStorage.getItem('User_Role');
   }
 
   public getFullName(): string | null {
@@ -45,6 +50,7 @@ export class AuthService {
     localStorage.removeItem('JWT_TOKEN');
     localStorage.removeItem('User_ID');
     localStorage.removeItem('User_Type');
+    localStorage.removeItem('User_Role');
     localStorage.removeItem('User_Fullname');
   }
 
