@@ -112,4 +112,19 @@ export class LoginPageComponent implements OnInit, AfterContentInit {
         'patientAuthentication'
   }
 
+  
+
+  checkloginURL() {
+
+    const url = window.location.href;
+    const parts = url.split("/");
+    const loginURL = parts[parts.length - 1];
+
+    if(loginURL == 'admin' || loginURL == 'staff') {
+      return true;
+    }
+    
+    return false;
+  }
+
 }

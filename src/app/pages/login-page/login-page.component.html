@@ -25,12 +25,12 @@
                 </mat-form-field>
 
                 <div class="text-right mb-3">
-                    <a class="cursor-pointer hover:underline hover:text-blue-500" (click)="openForgotPasswordDialog()">Forgot password?</a>
+                    <a class="cursor-pointer hover:underline hover:text-blue-500" (click)="openForgotPasswordDialog()" *ngIf="!checkloginURL()">Forgot password?</a>
                 </div>
     
                 <button mat-raised-button color="primary" class="w-[100%] !py-6">Login</button>
-                <p class="text-center !m-0 !my-3 text-slate-500">or</p>
-                <button mat-stroked-button color="primary" class="w-[100%] !py-6" type="button" routerLink="/create-account">Create account</button>
+                <p class="text-center !m-0 !my-3 text-slate-500" *ngIf="!checkloginURL()">or</p>
+                <button mat-stroked-button color="primary" class="w-[100%] !py-6" type="button" routerLink="/create-account" *ngIf="!checkloginURL()">Create account</button>
     
                 <div class="text-[12px] text-slate-500">
                     <p class="font-semibold !m-0 !mt-5">Note:</p>

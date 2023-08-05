@@ -35,7 +35,6 @@ export class UserServiceService {
   }
 
 
-
   async getAllPatientInformation(): Promise<any> {
 
     try {

@@ -8,6 +8,7 @@ import { faCheck, faXmark, faBell } from '@fortawesome/free-solid-svg-icons';
 import { dummy } from './dummy';
 import { ActivityLog } from 'src/app/_models/ActivityLog';
 import { Title } from '@angular/platform-browser';
+import { DashboardService } from 'src/app/_services/dashboard/dashboard.service';
 
 @Component({
   selector: 'app-activity-log',
@@ -16,27 +17,28 @@ import { Title } from '@angular/platform-browser';
 })
 export class ActivityLogComponent {
 
-  pageTitle: string = "Activty Log";
+  pageTitle: string = "Activity Log";
 
   faCheck = faCheck;
   faXmark = faXmark;
   faBell = faBell;
 
+  isLoading: boolean = true;
+  activityLogList: ActivityLog[] = [];
+
 
   displayedColumns: string[] = ['name', 'description', 'created_by', 'date_created'];
-  dataSource: MatTableDataSource<ActivityLog>;
+  dataSource!: MatTableDataSource<ActivityLog>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private titleService: Title, private dialog: MatDialog,  
-              private snackBar: MatSnackBar) {
-    this.dataSource = new MatTableDataSource(dummy);
-    
-    this.titleService.setTitle("Sibut Medicare | Activity Log");
-  }
+  constructor(
+    private dashboardService: DashboardService
+  ) { }
 
   ngOnInit(): void {
+    this.getActivityLog();
   }
 
   ngAfterViewInit() {
@@ -51,6 +53,16 @@ export class ActivityLogComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  async getActivityLog() {
+    const response = await this.dashboardService.getActivityLog();
+    this.activityLogList = response.result;
+    this.dataSource = new MatTableDataSource(this.activityLogList);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    console.log(this.activityLogList)
+    this.isLoading = false;
   }
 
 }
