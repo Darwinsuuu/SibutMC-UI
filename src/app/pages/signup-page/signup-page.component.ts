@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ModalSignupOtpComponent } from 'src/app/components/modal/modal-signup-otp/modal-signup-otp.component';
 import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
@@ -7,23 +7,32 @@ import { UserServiceService } from 'src/app/_services/user/user-service.service'
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Title } from '@angular/platform-browser';
+import { LocationService } from 'src/app/_services/location/location.service';
 
 @Component({
   selector: 'app-signup-page',
   templateUrl: './signup-page.component.html',
   styleUrls: ['./signup-page.component.scss']
 })
-export class SignupPageComponent {
+export class SignupPageComponent implements OnInit {
 
-  constructor(private titleService: Title, 
+  constructor(private titleService: Title,
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
     private router: Router,
     private smsService: SmsServiceService,
-    private userService: UserServiceService) { 
-      this.titleService.setTitle("Sibut Medicare | Create Account");
-    }
+    private userService: UserServiceService,
+    private locationService: LocationService) {
+    this.titleService.setTitle("Sibut Medicare | Create Account");
+  }
 
+  regionList: any[] = [];
+  provinceList: any[] = [];
+  municipalityList: any[] = [];
+  barangayList: any[] = [];
+
+  isPasswordVisible: boolean = false;
+  
   personalInfo: FormGroup = this.formBuilder.group({
     firstname: ["", [Validators.required, Validators.pattern(/^[A-Za-z -]+$/)]],
     middlename: ["", [Validators.pattern(/^[A-Za-z -]+$/)]],
@@ -36,7 +45,13 @@ export class SignupPageComponent {
   contactInfo: FormGroup = this.formBuilder.group({
     contact_no: ["", [Validators.required, Validators.pattern(/^(09|\+639)\d{9}$/)]],
     email: ["", [Validators.required, Validators.email]],
-    address: ["", [Validators.required]]
+  })
+
+  addressInfo: FormGroup = this.formBuilder.group({
+    region: ["", [Validators.required]],
+    province: ["", [Validators.required]],
+    cityMun: ["", [Validators.required]],
+    barangay: ["", [Validators.required]],
   })
 
   emergencyContactInfo: FormGroup = this.formBuilder.group({
@@ -50,8 +65,9 @@ export class SignupPageComponent {
   })
 
 
-
-  isPasswordVisible: boolean = false;
+  ngOnInit(): void {
+    this.getAllRegions();
+  }
 
   showPassword() {
     this.isPasswordVisible = !this.isPasswordVisible;
@@ -106,6 +122,7 @@ export class SignupPageComponent {
     const allInfo = {
       personalInfo: this.personalInfo.value,
       contactInfo: this.contactInfo.value,
+      addressInfo: this.addressInfo.value,
       emergencyContactInfo: this.emergencyContactInfo.value,
       accountInfo: this.accountInfo.value
     };
@@ -139,6 +156,54 @@ export class SignupPageComponent {
         }
       });
     }
+  }
+
+
+  // Location
+  async getAllRegions() {
+    const response = await this.locationService.getAllRegions();
+    this.regionList = response.result;
+  }
+
+  async getAllProvinceByRegion(id: any) {
+    const response = await this.locationService.getProvincesByRegion(id);
+    this.provinceList = response.result;
+  }
+
+  async getMunicipalityByProvince(id: any) {
+    const response = await this.locationService.getMunicipalityByProvince(id);
+    this.municipalityList = response.result;
+  }
+
+  async getBarangayByMunicipality(id: any) {
+    const response = await this.locationService.getBarangayByMunicipality(id);
+    this.barangayList = response.result;
+  }
+
+  regionSelect(event: any) {
+    this.provinceList = [];
+    this.municipalityList = [];
+    this.barangayList = [];
+
+    this.addressInfo.get('province')?.setValue('')
+    this.addressInfo.get('cityMun')?.setValue('')
+    this.addressInfo.get('barangay')?.setValue('')
+
+    this.getAllProvinceByRegion(event.value);
+  }
+
+  provinceSelect(event: any) {
+    this.municipalityList = [];
+    this.barangayList = [];
+    this.addressInfo.get('cityMun')?.setValue('')
+    this.addressInfo.get('barangay')?.setValue('')
+    this.getMunicipalityByProvince(event.value);
+  }
+
+  cityMunSelect(event: any) {
+    this.barangayList = [];
+    this.addressInfo.get('barangay')?.setValue('')
+    this.getBarangayByMunicipality(event.value);
   }
 
 }

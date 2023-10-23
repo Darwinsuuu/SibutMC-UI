@@ -7,7 +7,9 @@
             <img src="../../../assets/images/undraw_doctor_kw-5-l.svg" alt="" width="400" class="m-auto mb-10">
 
             <h1 class="!m-0 !font-bold !text-3xl">Sibut Medicare</h1>
-            <h3 class="text-slate-500">Welcome to SibutMedicare where you can now collect, and view your patients’ information through this website. Nurse and Staffs of Sibut healthcare center can also view and accept the patients' appointment request in this website. </h3>
+            <h3 class="text-slate-500">Welcome to SibutMedicare where you can now collect, and view your patients’
+                information through this website. Nurse and Staffs of Sibut healthcare center can also view and accept
+                the patients' appointment request in this website. </h3>
             <h3 class="!font-semibold">Already have account?</h3>
             <button mat-raised-button color="primary" type="button" routerLink="/login">Click here to login</button>
         </div>
@@ -105,11 +107,54 @@
                                     <mat-label>Email Address</mat-label>
                                     <input autocomplete="off" matInput placeholder="" formControlName="email">
                                 </mat-form-field>
+                            </div>
 
-                                <mat-form-field appearance="outline" class="!w-[100%]">
-                                    <mat-label>Address</mat-label>
-                                    <textarea matInput rows="5" placeholder="Street, Subdivision, City, Province"
-                                        formControlName="address"></textarea>
+                            <div>
+                                <button mat-stroked-button color="primary" matStepperPrevious
+                                    class="!px-9 !mr-3">Back</button>
+                                <button mat-raised-button color="primary" matStepperNext class="!px-9">Next</button>
+                            </div>
+                        </div>
+                    </form>
+                </mat-step>
+
+
+                <mat-step [stepControl]="addressInfo">
+                    <form [formGroup]="addressInfo">
+                        <ng-template matStepLabel>Address Information</ng-template>
+
+                        <div class="py-3">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                <mat-form-field appearance="outline" class="!w-full">
+                                    <mat-label>Region</mat-label>
+                                    <mat-select formControlName="region" (selectionChange)="regionSelect($event)">
+                                        <mat-option *ngFor="let reg of regionList" [value]="reg.regCode">{{ reg.regDesc
+                                            }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="!w-full">
+                                    <mat-label>Province</mat-label>
+                                    <mat-select formControlName="province" (selectionChange)="provinceSelect($event)">
+                                        <mat-option *ngFor="let prov of provinceList" [value]="prov.provCode">{{
+                                            prov.provDesc }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="!w-full">
+                                    <mat-label>Municipality/ City</mat-label>
+                                    <mat-select formControlName="cityMun" (selectionChange)="cityMunSelect($event)">
+                                        <mat-option *ngFor="let citymun of municipalityList"
+                                            [value]="citymun.citymunCode">{{ citymun.citymunDesc }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="!w-full">
+                                    <mat-label>Barangay</mat-label>
+                                    <mat-select formControlName="barangay">
+                                        <mat-option *ngFor="let brgy of barangayList" [value]="brgy.brgyCode">{{
+                                            brgy.brgyDesc }}</mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
 
@@ -121,6 +166,8 @@
                         </div>
                     </form>
                 </mat-step>
+
+
 
 
                 <mat-step [stepControl]="emergencyContactInfo">
@@ -167,8 +214,10 @@
 
                             <mat-form-field appearance="outline" class="!w-[100%]">
                                 <mat-label>Password</mat-label>
-                                <input matInput placeholder="" type="{{ isPasswordVisible ? 'text' : 'password' }}" formControlName="password">
-                                <mat-icon *ngIf="this.accountInfo.get('password')?.value" matSuffix (click)="showPassword()">{{ isPasswordVisible ? "visibility" :
+                                <input matInput placeholder="" type="{{ isPasswordVisible ? 'text' : 'password' }}"
+                                    formControlName="password">
+                                <mat-icon *ngIf="this.accountInfo.get('password')?.value" matSuffix
+                                    (click)="showPassword()">{{ isPasswordVisible ? "visibility" :
                                     "visibility_off"
                                     }}</mat-icon>
                             </mat-form-field>

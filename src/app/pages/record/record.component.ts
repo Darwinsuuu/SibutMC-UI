@@ -87,6 +87,7 @@ export class RecordComponent {
       }
 
       this.patientInfo = response.result;
+      console.log(this.patientInfo)
 
       setTimeout(() => {
         this.isLoading = false;
@@ -152,10 +153,7 @@ export class RecordComponent {
   }
 
   async onPrint() {
-
     await this.userService.printMedicalRecord(this.recordURL);
-
   }
-
 
 }

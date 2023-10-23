@@ -284,6 +284,32 @@ export class UserServiceService {
 
   }
 
+
+  async updateAddressInfo(addressInfo: any) {
+
+    try {
+
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
+      });
+
+      const url = environment.apiUrl + 'api/patient/updateAddressInfo';
+      const response = await this.http.put<any>(url, addressInfo, { headers }).toPromise();
+      return response;
+
+    } catch (error: any) {
+      if (error.status === 500) {
+        console.error('An internal server error occurred. Please try again later. ');
+        console.error(error)
+      } else {
+        console.error('An error occurred. Please try again. ');
+        console.error(error)
+      }
+      throw error.error;
+    }
+
+  }
+
   async updateMedicalInfo(medicalInfo: any) {
 
     try {
